@@ -47,7 +47,9 @@ def inject_utils():
 # -----------------------------
 @app.route("/")
 def home():
-    return render_template("user/home.html")  # 검색창 + 홈 버튼 + 설문 버튼
+    # 세션에서 모드 가져오기, 없으면 모바일로 기본 설정
+    mode = session.get("mode", "mobile")
+    return render_template("user/home.html", mode=mode)
 
 # -----------------------------
 # 설문 페이지
@@ -235,6 +237,11 @@ def attraction_detail(city_name, district_name, attraction_name):
         attraction_name=attraction_name,
         attraction=attraction
     )
+@app.route("/set_mode/<mode>")
+def set_mode(mode):
+    if mode in ["pc", "mobile"]:
+        session["mode"] = mode
+    return redirect(request.referrer or url_for("home"))  # 이전 페이지로 돌아가기
 
 # ================================
 # 설문 초기화

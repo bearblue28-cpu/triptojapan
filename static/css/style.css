@@ -1,3 +1,6 @@
+/* =============================
+   공용 스타일
+   ============================= */
 body {
     margin: 0;
     font-family: 'Pretendard', sans-serif;
@@ -76,23 +79,18 @@ body {
     background: #3563d6;
 }
 
-/* 하단 PC버전 버튼 (모바일 전용) */
-.pc-btn {
+/* =============================
+   PC/모바일 모드용
+   ============================= */
+/* 모바일 전용: 하단 PC버전 버튼 */
+body.mobile-mode .pc-btn {
+    display: block;
+}
+body.pc-mode .pc-btn {
     display: none;
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    background: #4f7cff;
-    color: #fff;
-    font-weight: 600;
-    z-index: 999;
 }
 
-/* 반응형: 모바일 화면 */
+/* 반응형 모바일 화면 조정 */
 @media screen and (max-width: 768px) {
     body { font-size: 14px; }
 
@@ -100,7 +98,19 @@ body {
         width: 200px;
     }
 
-    .pc-btn {
-        display: block; /* 모바일에서만 표시 */
+    .top-bar a {
+        padding: 6px 12px;
+        font-size: 14px;
     }
+
+    .search-box a.home-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .search-box button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
 }
