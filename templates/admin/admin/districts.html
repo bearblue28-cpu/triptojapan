@@ -1,0 +1,69 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2 style="margin-bottom:16px;">
+    {{ city.city }} - 구 / 지구 관리
+</h2>
+
+<div style="margin-bottom:24px; display:flex; gap:10px;">
+    <a href="{{ url_for('admin.district_new', city_name=city.city) }}"
+       class="top-btn">
+        + 구 / 지구 추가
+    </a>
+
+    <a href="{{ url_for('admin.cities') }}"
+       class="back-btn">
+        ← 도시 목록
+    </a>
+</div>
+
+{% if city.districts %}
+<ul style="list-style:none; padding:0; margin:0;">
+{% for d_name, district in city.districts.items() %}
+    <li style="
+        margin-bottom:14px;
+        padding:16px 18px;
+        background:#fff;
+        border-radius:12px;
+        box-shadow:0 6px 14px rgba(0,0,0,0.06);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    ">
+
+        <div>
+            <strong style="font-size:16px;">{{ d_name }}</strong>
+            {% if district.description %}
+                <div style="font-size:13px; color:#666; margin-top:4px;">
+                    {{ district.description }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div style="display:flex; gap:14px; font-size:14px;">
+            <a href="{{ url_for('admin.district_tags',
+                                city_name=city.city,
+                                district_name=d_name) }}">
+                🏷 태그 관리
+            </a>
+
+            <a href="{{ url_for('admin.attractions',
+                                city_name=city.city,
+                                district_name=d_name) }}">
+                📍 명소 관리
+            </a>
+
+            <a href="{{ url_for('admin.district_edit',
+                                city_name=city.city,
+                                district_name=d_name) }}">
+                ✏ 수정
+            </a>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+    <p style="color:#888;">등록된 구 / 지구가 없습니다.</p>
+{% endif %}
+
+{% endblock %}

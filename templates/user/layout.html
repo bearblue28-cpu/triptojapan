@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>여행 사이트</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>여행 사이트</h1>
+        <nav>
+            <a href="{{ url_for('user.index') }}">홈</a>
+            <a href="{{ url_for('user.search') }}">검색</a>
+            <a href="{{ url_for('user.recommend') }}">추천</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

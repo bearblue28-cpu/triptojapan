@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ city.city }} - {{ district_name }} 관광지 관리</title>
+</head>
+<body>
+    <h1>{{ city.city }} / {{ district_name }} - 관광지 관리</h1>
+
+    <!-- 관광지 추가 -->
+    <h2>관광지 추가</h2>
+    <form action="{{ url_for('admin.add_attraction', city_name=city.city, district_name=district_name) }}" method="post">
+        <input name="name" placeholder="관광지명" required>
+        <input name="description" placeholder="설명">
+        <input name="tags" placeholder="태그(콤마로 구분)">
+        <input name="background" placeholder="배경 영화(콤마로 구분)">
+        <button type="submit">추가</button>
+    </form>
+
+    <!-- 관광지 목록 -->
+    <h2>등록된 관광지</h2>
+    <table border="1">
+        <tr>
+            <th>관광지명</th>
+            <th>설명</th>
+            <th>태그</th>
+            <th>배경</th>
+            <th>삭제</th>
+        </tr>
+        {% for name, attr in district.attractions.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ attr.description }}</td>
+            <td>{{ attr.tags | join(', ') }}</td>
+            <td>{{ attr.background | join(', ') }}</td>
+            <td>
+                <a href="{{ url_for('admin.delete_attraction', city_name=city.city, district_name=district_name, attraction_name=name) }}">삭제</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

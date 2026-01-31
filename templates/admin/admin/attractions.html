@@ -1,0 +1,94 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2>{{ city.city }} / {{ district_name }} - 명소 관리</h2>
+
+<a href="{{ url_for('admin.attraction_new',
+                    city_name=city.city,
+                    district_name=district_name) }}"
+   class="top-btn"
+   style="margin-bottom:20px; display:inline-block;">
+    + 명소 추가
+</a>
+
+<ul style="list-style:none; padding:0;">
+{% for name, attraction in attractions.items() %}
+    <li style="
+        padding:16px;
+        background:#fff;
+        border-radius:12px;
+        margin-bottom:14px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    ">
+
+        <!-- 명소 이름 -->
+        <strong style="font-size:16px;">{{ name }}</strong>
+
+        <!-- 설명 -->
+        <div style="font-size:13px; color:#666; margin-top:6px;">
+            {{ attraction.description }}
+        </div>
+
+        <!-- 태그 요약 -->
+        {% if attraction.tags %}
+        <div style="margin-top:8px; font-size:13px;">
+            {% for tag, children in attraction.tags.items() %}
+                <span style="
+                    background:#eef2ff;
+                    padding:4px 8px;
+                    border-radius:6px;
+                    margin-right:6px;
+                    display:inline-block;
+                ">
+                    #{{ tag }}
+                    {% if children %}
+                        ({{ children|length }})
+                    {% endif %}
+                </span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 관리 버튼 -->
+        <div style="margin-top:12px; display:flex; gap:14px; align-items:center;">
+            <a href="{{ url_for('admin.attraction_tags',
+                                city_name=city.city,
+                                district_name=district_name,
+                                attraction_name=name) }}">
+                🏷 태그 관리
+            </a>
+
+            <!-- ✅ 명소 삭제 -->
+            <form method="post"
+                  action="{{ url_for(
+                      'admin.attraction_delete',
+                      city_name=city.city,
+                      district_name=district_name,
+                      attraction_name=name
+                  ) }}"
+                  onsubmit="return confirm('이 명소를 삭제할까요?');"
+                  style="display:inline;">
+                <button type="submit"
+                        style="
+                            background:#f44336;
+                            color:#fff;
+                            border:none;
+                            padding:6px 10px;
+                            border-radius:6px;
+                            font-size:13px;
+                            cursor:pointer;
+                        ">
+                    🗑 삭제
+                </button>
+            </form>
+        </div>
+
+    </li>
+{% endfor %}
+</ul>
+
+{% if not attractions %}
+    <p style="color:#888;">등록된 명소가 없습니다.</p>
+{% endif %}
+
+{% endblock %}

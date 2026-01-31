@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>관리자 대시보드</title>
+<style>
+body { font-family:sans-serif; background:#f5f6f8; margin:0; padding:20px; }
+h1 { text-align:center; }
+.container { max-width:1000px; margin:0 auto; }
+.card { background:#fff; padding:16px; border-radius:12px; margin-bottom:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+.card h2 { margin:0; display:flex; justify-content:space-between; }
+.card form { display:inline; }
+.button { padding:4px 8px; margin-left:4px; border:none; border-radius:6px; cursor:pointer; }
+.add-btn { background:#4f7cff; color:#fff; }
+.delete-btn { background:#ff4d4f; color:#fff; }
+.edit-btn { background:#ffa500; color:#fff; }
+</style>
+</head>
+<body>
+<h1>관리자 대시보드</h1>
+<div class="container">
+
+<!-- 도시 추가 -->
+<div class="card">
+<h2>도시 추가</h2>
+<form method="POST" action="{{ url_for('admin.add_city') }}">
+    도시명: <input type="text" name="city" required>
+    설명: <input type="text" name="description">
+    <!-- 점수 입력 -->
+    R: <input type="number" name="R" min="0" max="5" value="0">
+    A: <input type="number" name="A" min="0" max="5" value="0">
+    C: <input type="number" name="C" min="0" max="5" value="0">
+    F: <input type="number" name="F" min="0" max="5" value="0">
+    N: <input type="number" name="N" min="0" max="5" value="0">
+    P: <input type="number" name="P" min="0" max="5" value="0">
+    S: <input type="number" name="S" min="0" max="5" value="0">
+    <button class="button add-btn" type="submit">추가</button>
+</form>
+</div>
+
+<!-- 기존 도시 리스트 -->
+{% for city in destinations %}
+<div class="card">
+<h2>
+    {{ city.city }}
+    <span>
+        <form method="GET" action="{{ url_for('admin.delete_city', city_name=city.city) }}">
+            <button class="button delete-btn" type="submit">삭제</button>
+        </form>
+    </span>
+</h2>
+<p><strong>설명:</strong> {{ city.description }}</p>
+
+<!-- 구/지구 추가 -->
+<form method="POST" action="{{ url_for('admin.add_district', city_name=city.city) }}">
+    구/지구명: <input type="text" name="district" required>
+    설명: <input type="text" name="description">
+    <button class="button add-btn" type="submit">추가</button>
+</form>
+
+<!-- 구/지구 리스트 -->
+{% for d_name, district in city.districts.items() %}
+<div style="margin-left:20px; margin-top:10px;">
+    <h3>{{ d_name }}
+        <span>
+            <form method="GET" action="{{ url_for('admin.delete_district', city_name=city.city, district_name=d_name) }}" style="display:inline;">
+                <button class="button delete-btn" type="submit">삭제</button>
+            </form>
+        </span>
+    </h3>
+    <form method="POST" action="{{ url_for('admin.edit_district', city_name=city.city, district_name=d_name) }}">
+        설명: <input type="text" name="description" value="{{ district.description }}">
+        <button class="button edit-btn" type="submit">수정</button>
+    </form>
+
+    <!-- 관광지 추가 -->
+    <form method="POST" action="{{ url_for('admin.add_attraction', city_name=city.city, district_name=d_name) }}">
+        관광지명: <input type="text" name="name" required>
+        관광지 설명: <input type="text" name="description">
+        태그: <input type="text" name="tags" placeholder="콤마로 구분">
+        배경: <input type="text" name="background" placeholder="콤마로 구분">
+        <button class="button add-btn" type="submit">추가</button>
+    </form>
+
+    <!-- 관광지 리스트 -->
+    {% for a_name, attr in district.attractions.items() %}
+    <div style="margin-left:20px; margin-top:5px;">
+        <h4>{{ a_name }}
+            <form method="GET" action="{{ url_for('admin.delete_attraction', city_name=city.city, district_name=d_name, attraction_name=a_name) }}" style="display:inline;">
+                <button class="button delete-btn" type="submit">전체삭제</button>
+            </form>
+        </h4>
+        <p><strong>설명:</strong> {{ attr.description }}
+            {% if attr.description %}
+            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='description') }}">[삭제]</a>
+            {% endif %}
+        </p>
+        <p><strong>태그:</strong> {{ attr.tags|join(', ') }}
+            {% if attr.tags %}
+            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='tags') }}">[삭제]</a>
+            {% endif %}
+        </p>
+        <p><strong>배경:</strong> {{ attr.background|join(', ') }}
+            {% if attr.background %}
+            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='background') }}">[삭제]</a>
+            {% endif %}
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+</div>
+{% endfor %}
+
+</div>
+</body>
+</html>

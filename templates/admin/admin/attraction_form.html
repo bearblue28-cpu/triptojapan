@@ -1,0 +1,27 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2>{{ city.city }} / {{ district_name }} - 명소 추가</h2>
+
+<form method="post">
+    <div style="margin-bottom:12px;">
+        <input type="text"
+               name="name"
+               placeholder="명소 이름"
+               required
+               style="padding:8px; width:300px;">
+    </div>
+
+    <div style="margin-bottom:12px;">
+        <textarea name="description"
+                  placeholder="설명"
+                  rows="4"
+                  style="width:300px; padding:8px;"></textarea>
+    </div>
+
+    <button type="submit" class="top-btn">
+        저장
+    </button>
+</form>
+
+{% endblock %}

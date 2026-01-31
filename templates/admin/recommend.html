@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>추천 일본 여행지</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:'Pretendard',sans-serif; background:#f5f6f8; padding:24px;}
+    .card { background:#fff; padding:24px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08); margin-bottom:16px;}
+    .city { font-size:18px; font-weight:600; margin-bottom:4px;}
+    .desc { font-size:14px; color:#666; margin-bottom:8px;}
+    .percent { font-size:13px; color:#4f7cff; font-weight:600; margin-bottom:6px;}
+    .highlights { font-size:13px; color:#333;}
+    .header { margin-bottom:24px; }
+    .back-btn {
+      display:inline-block; margin-top:16px; padding:10px 18px; border:none; border-radius:10px; background:#4f7cff; color:white; cursor:pointer;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h2>당신의 여행 성향: {{ display_text(travel_type) }}</h2>
+  <a href="{{ url_for('reset') }}" class="back-btn">다시하기</a>
+</div>
+
+{% for dest in results %}
+<div class="card" style="display:flex; align-items:flex-start; gap:16px; cursor:pointer;">
+    <!-- 클릭하면 도시 페이지로 이동 -->
+    <a href="{{ url_for('city_detail', city_name=dest.city) }}" style="text-decoration:none; color:inherit; display:flex; width:100%;">
+        <div style="flex-grow:1;">
+            <div class="city" style="font-weight:600; font-size:18px;">{{ dest.city }}</div>
+            <div class="desc">{{ dest.description }}</div>
+
+            <div class="highlights">
+                추천 장소: 
+                {% for h in dest.highlights %}
+                    {{ display_text(h) }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="recommended_for">
+                추천 용도: 
+                {% for tag in dest.recommended_for %}
+                    {{ display_text(tag) }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="percent">유형 일치: {{ dest.percent }}%</div>
+        </div>
+    </a>
+</div>
+{% endfor %}
+
+
+
+
+</body>
+</html>

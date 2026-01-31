@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ city.city }} 구/지구 관리</title>
+</head>
+<body>
+    <h1>{{ city.city }} - 구/지구 관리</h1>
+
+    <!-- 구/지구 추가 -->
+    <h2>구/지구 추가</h2>
+    <form action="{{ url_for('admin.add_district', city_name=city.city) }}" method="post">
+        <input name="district" placeholder="구/지구명" required>
+        <input name="description" placeholder="설명">
+        <button type="submit">추가</button>
+    </form>
+
+    <!-- 구/지구 목록 -->
+    <h2>등록된 구/지구</h2>
+    <table border="1">
+        <tr>
+            <th>구/지구명</th>
+            <th>설명</th>
+            <th>편집</th>
+            <th>삭제</th>
+            <th>관광지 관리</th>
+        </tr>
+        {% for name, d in city.districts.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ d.description }}</td>
+            <td>
+                <form action="{{ url_for('admin.edit_district', city_name=city.city, district_name=name) }}" method="post">
+                    <input name="description" placeholder="설명 수정" value="{{ d.description }}">
+                    <button type="submit">수정</button>
+                </form>
+            </td>
+            <td>
+                <a href="{{ url_for('admin.delete_district', city_name=city.city, district_name=name) }}">삭제</a>
+            </td>
+            <td>
+                <a href="{{ url_for('admin.add_attraction', city_name=city.city, district_name=name) }}">관광지 관리</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2>
+    {{ city.city }} /
+    {{ district_name }} /
+    {{ attraction_name }}
+</h2>
+
+<h3 style="margin-top:12px;">🏷 명소 태그 관리</h3>
+
+<!-- =========================
+     메인 태그 추가
+========================= -->
+<form method="post"
+      action="{{ url_for(
+        'admin.attraction_tag_add',
+        city_name=city.city,
+        district_name=district_name,
+        attraction_name=attraction_name
+      ) }}"
+      style="margin:20px 0; display:flex; gap:8px;">
+
+    <input name="tag"
+           placeholder="메인 태그 (예: 영화 촬영지, 애니 성지)"
+           required
+           style="padding:8px; flex:1;">
+
+    <button class="top-btn">+ 메인 태그 추가</button>
+</form>
+
+<hr style="margin:24px 0;">
+
+<!-- =========================
+     태그 목록
+========================= -->
+{% for tag, children in tags.items() %}
+<div style="
+    background:#fff;
+    padding:18px;
+    margin-bottom:18px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.06);
+">
+
+    <!-- 메인 태그 제목 -->
+    <strong style="font-size:16px;"># {{ tag }}</strong>
+
+    <!-- 메인 태그 삭제 -->
+    <form method="post"
+          action="{{ url_for(
+            'admin.attraction_tag_delete',
+            city_name=city.city,
+            district_name=district_name,
+            attraction_name=attraction_name,
+            tag=tag
+          ) }}"
+          style="display:inline; margin-left:10px;"
+          onsubmit="return confirm('메인 태그를 삭제할까요?');">
+        <button style="font-size:12px; color:#f44336;">삭제</button>
+    </form>
+
+    <!-- 하위 태그 목록 -->
+    {% if children %}
+        <ul style="margin-top:10px; padding-left:18px;">
+        {% for child in children %}
+            <li style="margin-bottom:6px; font-size:14px;">
+                {{ child }}
+
+                <!-- ✅ 하위 태그 삭제 (POST) -->
+                <form method="post"
+                      action="{{ url_for(
+                        'admin.attraction_child_tag_delete',
+                        city_name=city.city,
+                        district_name=district_name,
+                        attraction_name=attraction_name,
+                        tag=tag,
+                        child=child
+                      ) }}"
+                      style="display:inline; margin-left:8px;"
+                      onsubmit="return confirm('하위 태그를 삭제할까요?');">
+                    <button style="font-size:12px; color:#f44336;">삭제</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color:#888; margin-top:8px;">
+            하위 태그 없음
+        </p>
+    {% endif %}
+
+    <!-- 하위 태그 추가 -->
+    <form method="post"
+          action="{{ url_for(
+            'admin.attraction_child_tag_add',
+            city_name=city.city,
+            district_name=district_name,
+            attraction_name=attraction_name,
+            tag=tag
+          ) }}"
+          style="margin-top:12px; display:flex; gap:8px;">
+
+        <input name="child"
+               placeholder="하위 태그 (예: 기생충, 스즈메의 문단속)"
+               required
+               style="padding:6px; flex:1;">
+
+        <button>+ 하위 태그 추가</button>
+    </form>
+
+</div>
+{% endfor %}
+
+{% if not tags %}
+<p style="color:#888;">아직 태그가 없습니다.</p>
+{% endif %}
+
+{% endblock %}

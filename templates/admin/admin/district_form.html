@@ -1,0 +1,27 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<h2>
+    {% if district_name %}{{ district_name }} 수정{% else %}새 구/지구 추가{% endif %}
+</h2>
+
+<form method="post" style="max-width:400px;">
+    {% if not district_name %}
+    <label>구/지구 이름</label><br>
+    <input type="text" name="district_name" required style="width:100%; margin-bottom:12px;"><br>
+    {% endif %}
+
+    <label>설명</label><br>
+    <textarea name="description" rows="3" style="width:100%; margin-bottom:12px;">{{ district.description if district else "" }}</textarea><br>
+
+    <label>태그 (쉼표로 구분)</label><br>
+    <input type="text" name="tags" value="{{ district.tags|join(',') if district else '' }}" style="width:100%; margin-bottom:12px;"><br>
+
+    <button type="submit" style="padding:8px 12px; background:#4f7cff; color:#fff; border:none; border-radius:6px;">
+        저장
+    </button>
+    <a href="{{ url_for('admin.districts', city_name=city.city) }}" style="padding:8px 12px; background:#888; color:#fff; border-radius:6px; text-decoration:none; margin-left:8px;">
+        취소
+    </a>
+</form>
+{% endblock %}

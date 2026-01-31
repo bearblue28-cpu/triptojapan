@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ city.city }} 명소 관리</title>
+</head>
+<body>
+
+<h1>{{ city.city }} 명소 관리</h1>
+
+<h2>명소 추가</h2>
+<form method="post">
+    <input name="name" placeholder="명소 이름"><br>
+    <textarea name="description" placeholder="설명"></textarea><br>
+    <input name="tags" placeholder="태그 (콤마로 구분)"><br>
+    <button>추가</button>
+</form>
+
+<hr>
+
+<h2>등록된 명소</h2>
+<ul>
+{% for spot in city.spots %}
+    <li>
+        <b>{{ spot.name }}</b>
+        ({{ ", ".join(spot.tags) }})
+    </li>
+{% endfor %}
+</ul>
+
+<a href="/admin">← 관리자 홈</a>
+
+</body>
+</html>

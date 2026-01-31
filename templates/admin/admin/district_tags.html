@@ -1,0 +1,50 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2>{{ city.city }} / {{ district_name }} - 태그 관리</h2>
+
+<form method="post"
+      action="{{ url_for('admin.district_tag_add',
+                         city_name=city.city,
+                         district_name=district_name) }}"
+      style="margin-bottom:20px;">
+
+    <input type="text"
+           name="tag"
+           placeholder="태그 입력 (예: 쇼핑, 야경)"
+           required
+           style="padding:8px; width:240px;">
+
+    <button type="submit" class="top-btn">
+        + 태그 추가
+    </button>
+</form>
+
+<ul style="list-style:none; padding:0;">
+{% for tag in tags %}
+    <li style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:10px 14px;
+        background:#fff;
+        border-radius:8px;
+        margin-bottom:8px;
+    ">
+        <span>🏷 {{ tag }}</span>
+        <a href="{{ url_for('admin.district_tag_delete',
+                            city_name=city.city,
+                            district_name=district_name,
+                            tag=tag) }}"
+           style="color:#f44336;">
+            삭제
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% if not tags %}
+    <p style="color:#888;">등록된 태그가 없습니다.</p>
+{% endif %}
+
+{% endblock %}

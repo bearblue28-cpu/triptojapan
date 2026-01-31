@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>{{ city.city }} / {{ district_name }} / {{ attraction_name }}</h2>
+<p>{{ attraction.description }}</p>
+
+{% if attraction.tags %}
+<h3>태그</h3>
+<ul>
+{% for tag, children in attraction.tags.items() %}
+    <li>
+        {{ tag }}
+        {% if children %}
+            <ul>
+            {% for child in children %}
+                <li>{{ child }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

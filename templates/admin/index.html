@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Style Test</title>
+
+    <!-- 세련된 기본 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Pretendard', sans-serif;
+            background: #f5f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 420px;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            background: #f0f4ff;
+            border-color: #4f7cff;
+            color: #4f7cff;
+        }
+
+        .progress {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #999;
+            text-align: right;
+        }
+        
+    </style>
+</head>
+<body>
+<!-- 홈 버튼: 왼쪽 상단 고정 -->
+<div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+    <a href="{{ url_for('survey') }}" 
+       style="
+           display:inline-block; 
+           padding:24px 32px;        /* 기존 12px → 18px, 16px → 24px */
+           background:#4f7cff; 
+           color:#fff; 
+           border-radius:16px;       /* 버튼 모서리 더 둥글게 */
+           font-weight:700;          /* 글자 굵게 */
+           font-size:20px;           /* 글자 크기 확대 */
+           text-decoration:none; 
+           box-shadow:0 6px 12px rgba(0,0,0,0.2);  /* 그림자 강조 */
+       ">
+        홈으로 가기
+    </a>
+</div>
+
+
+<!-- 상단 검색창: 가운데 고정 -->
+<div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 999;">
+    <form method="GET" action="{{ url_for('search') }}" style="display:flex; gap:8px;">
+        <input type="text" name="q" placeholder="태그로 검색..." 
+               value="{{ request.args.get('q', '') }}"
+               style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; width:250px;">
+        <button type="submit" style="padding:8px 12px; border-radius:8px; border:none; background:#4f7cff; color:#fff; cursor:pointer;">
+            검색
+        </button>
+    </form>
+</div>
+
+<!-- 설문 카드 -->
+<div class="card" style="margin-top: 80px;">
+    <!-- 선택 버튼 form -->
+    <form method="post">
+        <div class="question">
+            {{ display_text(question.question) }}
+        </div>
+
+        <div class="options">
+            {% for key, option in question.options.items() %}
+                <button
+                  class="option-btn"
+                  type="submit"
+                  name="choice"
+                  value="{{ key }}">
+                    {{ display_text(option[0]) }}
+                </button>
+            {% endfor %}
+        </div>
+    </form>
+
+    <!-- 이전 버튼 form -->
+    {% if step > 1 %}
+    <form method="post" style="margin-top:16px; text-align:center;">
+        <button type="submit" name="back" value="1"
+                style="padding:10px 16px; border-radius:12px; border:1px solid #ccc; background:#f0f0f0; cursor:pointer;">
+            ⬅ 이전
+        </button>
+    </form>
+    {% endif %}
+
+    <div class="progress">
+        {{ step }} / {{ total }}
+    </div>
+</div>
+

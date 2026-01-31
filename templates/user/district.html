@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>{{ city.city }} / {{ district_name }}</h2>
+<p>{{ district.description }}</p>
+
+<h3>명소</h3>
+<ul>
+{% for a_name, attraction in district.attractions.items() %}
+    <li>
+        <a href="{{ url_for('user.attraction_detail', city_name=city.city, district_name=district_name, attraction_name=a_name) }}">
+            {{ a_name }} - {{ attraction.description }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

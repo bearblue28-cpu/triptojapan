@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ district_name }} 상세</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Pretendard', sans-serif; background:#f5f6f8; margin:0; padding:0; text-align:center; }
+.container { max-width:700px; margin:100px auto 50px; }
+.btn-group { display:flex; justify-content:center; gap:12px; margin-bottom:30px; }
+.top-btn { padding:12px 18px; background:#4f7cff; color:#fff; border-radius:12px; font-weight:600; text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.15); transition:0.2s; }
+.top-btn:hover { background:#3563d6; }
+.card { background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.05); text-align:left; margin-bottom:12px; }
+.card a { color:#4f7cff; font-weight:600; text-decoration:none; }
+.card a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="btn-group">
+        <a href="{{ url_for('city_detail', city_name=city.city) }}" class="top-btn">도시로 돌아가기</a>
+        <a href="{{ url_for('survey') }}" class="top-btn">홈으로 가기</a>
+    </div>
+
+    <h2>{{ district_name }}</h2>
+    <p>{{ district.description }}</p>
+
+    {% if attractions %}
+        <h3>관광지</h3>
+        {% for name, attr in attractions.items() %}
+            <div class="card">
+                <a href="{{ url_for('attraction_detail', city_name=city.city, district_name=district_name, attraction_name=name) }}">{{ name }}</a>
+                <p>{{ attr.description }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>
+

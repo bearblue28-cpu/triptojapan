@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>검색 결과: "{{ query }}"</h2>
+{% if results %}
+<ul>
+{% for r in results %}
+    {% if r.type == 'district' %}
+    <li>
+        <a href="{{ url_for('user.district_detail', city_name=r.city, district_name=r.district) }}">
+            {{ r.city }} / {{ r.district }} - {{ r.description }}
+        </a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{{ url_for('user.attraction_detail', city_name=r.city, district_name=r.district, attraction_name=r.attraction) }}">
+            {{ r.city }} / {{ r.district }} / {{ r.attraction }} - {{ r.description }}
+        </a>
+    </li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% else %}
+<p>검색 결과가 없습니다.</p>
+{% endif %}
+{% endblock %}

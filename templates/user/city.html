@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>{{ city.city }}</h2>
+<p>{{ city.description }}</p>
+
+<h3>구/지구</h3>
+<ul>
+{% for d_name, district in city.districts.items() %}
+    <li>
+        <a href="{{ url_for('user.district_detail', city_name=city.city, district_name=d_name) }}">
+            {{ d_name }} - {{ district.description }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">
+    {% if city %}도시 수정{% else %}도시 추가{% endif %}
+</h2>
+
+<form method="post"
+      style="max-width:500px; background:#fff; padding:20px;
+             border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+
+    <!-- 도시 이름 -->
+    <label style="font-weight:600;">도시 이름</label><br>
+    <input name="city"
+           value="{{ city.city if city else '' }}"
+           placeholder="예: 도쿄"
+           required
+           {% if city %}readonly{% endif %}
+           style="width:100%; padding:10px; margin:8px 0 16px;
+                  border-radius:8px; border:1px solid #ccc;">
+    
+
+    <!-- 도시 설명 -->
+    <label style="font-weight:600;">도시 설명</label><br>
+    <textarea name="description"
+              placeholder="도시에 대한 간단한 설명"
+              style="width:100%; padding:10px; height:80px;
+                     border-radius:8px; border:1px solid #ccc;
+                     margin:8px 0 16px;">{{ city.description if city else '' }}</textarea>
+
+
+    <!-- 대표 태그 -->
+    <label style="font-weight:600;">대표 태그 (최대 3개)</label><br>
+    <input name="tags"
+           value="{{ city.tags | join(', ') if city else '' }}"
+           placeholder="예: 트렌디, 쇼핑, 야경"
+           style="width:100%; padding:10px; margin:8px 0;
+                  border-radius:8px; border:1px solid #ccc;">
+
+    <small style="color:#666;">
+        ※ 홈페이지에는 앞 3개만 노출됩니다 (쉼표로 구분)
+    </small>
+
+    <!-- 버튼 -->
+    <div style="margin-top:24px; display:flex; gap:12px;">
+        <button type="submit"
+                style="padding:10px 16px; background:#4f7cff;
+                       color:#fff; border:none; border-radius:8px;
+                       font-weight:600; cursor:pointer;">
+            저장
+        </button>
+
+        <a href="{{ url_for('admin.cities') }}"
+           style="padding:10px 16px; background:#eee;
+                  border-radius:8px; text-decoration:none;
+                  color:#333; font-weight:600;">
+            취소
+        </a>
+    </div>
+
+</form>
+
+{% endblock %}

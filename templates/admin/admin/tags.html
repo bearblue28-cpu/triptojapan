@@ -1,0 +1,36 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+
+<h2>태그 관리</h2>
+
+<form method="post" action="{{ url_for('admin.tag_new') }}">
+    <input name="name" placeholder="메인 태그 이름">
+    <button type="submit">메인 태그 추가</button>
+</form>
+
+<hr>
+
+{% for tag, info in tags.items() %}
+<div style="border:1px solid #ccc; padding:16px; margin-bottom:16px;">
+    <h3>{{ tag }}</h3>
+
+    <a href="{{ url_for('admin.tag_delete', tag=tag) }}">메인 태그 삭제</a>
+
+    <h4>하위 태그</h4>
+    <ul>
+        {% for child in info.children %}
+        <li>
+            {{ child }}
+            <a href="{{ url_for('admin.child_tag_delete', tag=tag, child=child) }}">삭제</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form method="post" action="{{ url_for('admin.child_tag_new', tag=tag) }}">
+        <input name="child" placeholder="하위 태그 이름">
+        <button type="submit">하위 태그 추가</button>
+    </form>
+</div>
+{% endfor %}
+
+{% endblock %}

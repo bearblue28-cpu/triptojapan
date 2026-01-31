@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Survey Logs</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; }
+    .log {
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+    .type { font-weight: bold; }
+    .scores { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<h2>설문 결과 로그</h2>
+
+{% for log in logs %}
+  <div class="log">
+    <div class="type">{{ log.type }}</div>
+    <div class="scores">
+      {{ log.scores }}
+    </div>
+    <div class="time">{{ log.timestamp }}</div>
+  </div>
+{% endfor %}
+
+</body>
+</html>

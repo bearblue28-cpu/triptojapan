@@ -1,0 +1,60 @@
+[
+  {
+    "city": "도쿄",
+    "description": "최신 트렌드와 전통 문화",
+    "scores": {
+      "R": 2,
+      "A": 5,
+      "C": 4,
+      "F": 4,
+      "N": 0,
+      "P": 1,
+      "S": 3
+    },
+    "districts": {
+      "신주쿠": {
+        "description": "번화가 중심",
+        "attractions": {
+          "신주쿠 공원": {
+            "description": "",
+            "tags": [
+              "산책",
+              "여유",
+              "현지 여행"
+            ],
+            "background": []
+          }
+        }
+      }
+    }
+  },
+  {
+    "city": "후쿠오카 ",
+    "description": "규슈의 관문이자 여유로운 분위기의 미식 도시",
+    "scores": {
+      "R": 3,
+      "A": 2,
+      "C": 2,
+      "F": 4,
+      "N": 0,
+      "P": 2,
+      "S": 2
+    },
+    "districts": {
+      "하타카": {
+        "description": "후쿠오카의 중심",
+        "attractions": {
+          "캐널시티": {
+            "description": "후쿠오카의 대표 복합 쇼핑몰",
+            "tags": [
+              "쇼핑",
+              "산책",
+              "미식"
+            ],
+            "background": []
+          }
+        }
+      }
+    }
+  }
+]
