@@ -47,9 +47,7 @@ def inject_utils():
 # -----------------------------
 @app.route("/")
 def home():
-    # 세션에서 모드 가져오기, 없으면 모바일로 기본 설정
-    mode = session.get("mode", "mobile")
-    return render_template("user/home.html", mode=mode)
+    return render_template("user/home.html")
 
 # -----------------------------
 # 설문 페이지

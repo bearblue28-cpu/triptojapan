@@ -1,0 +1,45 @@
+/* =============================
+   BASE (공용)
+   ============================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Pretendard', sans-serif;
+    background: #f5f6f8;
+    color: #222;
+}
+
+/* PC / 모바일 모드 제어 */
+body.mobile-mode .pc-btn {
+    display: block;
+}
+
+body.pc-mode .pc-btn {
+    display: none;
+}
+
+/* 모바일 기본 폰트 조정 */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* 모바일 하단 PC 버튼 (공용 컴포넌트) */
+.pc-btn {
+    display: none;
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+    background: #4f7cff;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    z-index: 101;
+}

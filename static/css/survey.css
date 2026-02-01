@@ -1,0 +1,81 @@
+/* =============================
+   SURVEY / CARD PAGES
+   ============================= */
+
+body.survey-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 카드 */
+body.survey-page .card {
+    background: #fff;
+    width: 420px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* 질문 */
+body.survey-page .question {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+/* 선택지 */
+body.survey-page .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+body.survey-page .option-btn {
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s;
+}
+
+body.survey-page .option-btn:hover {
+    background: #f0f4ff;
+    border-color: #4f7cff;
+    color: #4f7cff;
+}
+
+/* 이전 버튼 */
+body.survey-page .back-btn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+/* 진행도 */
+body.survey-page .progress {
+    margin-top: 24px;
+    font-size: 13px;
+    color: #999;
+    text-align: right;
+}
+
+/* 모바일 */
+@media screen and (max-width: 768px) {
+    body.survey-page .card {
+        width: 90%;
+        padding: 24px;
+    }
+
+    body.survey-page .option-btn {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+}

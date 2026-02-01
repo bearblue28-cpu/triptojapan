@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- 🔥 모바일 대응 핵심 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}여행 사이트{% endblock %}</title>
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="{% if session.get('mode') == 'pc' %}pc-mode{% else %}mobile-mode{% endif %}">
+
+    <!-- 상단 바 (공통) -->
+    <header class="top-bar">
+        <a href="{{ url_for('home') }}">홈</a>
+    </header>
+
+    <!-- 페이지별 내용 -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

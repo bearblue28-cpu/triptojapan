@@ -1,138 +1,31 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>홈 | 여행 추천</title>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Pretendard', sans-serif;
-    background: #f5f6f8;
-}
+{% extends "layout.html" %}
 
-/* 상단 바 */
-.top-bar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    gap: 12px;
-}
+{% block title %}홈 | 여행 추천{% endblock %}
 
-.top-bar a {
-    text-decoration: none;
-    color: #4f7cff;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 12px;
-    background: #eef2ff;
-    transition: 0.2s;
-    white-space: nowrap;
-}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
 
-.top-bar a:hover { background: #d6e0ff; }
+{% block content %}
 
-/* 중앙 검색창 */
-.search-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* 홈 버튼 */
-.search-box a.home-btn {
-    text-decoration: none;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: #4f7cff;
-    color: #fff;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.search-box a.home-btn:hover { background: #3563d6; }
-
-/* 검색 입력 */
-.search-box input[type="text"] {
-    width: 400px;
-    max-width: 80vw;
-    padding: 12px 16px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-
-/* 검색 버튼 */
-.search-box button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    background: #4f7cff;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.search-box button:hover { background: #3563d6; }
-
-/* 하단 PC버전 버튼 (모바일 전용) */
-.pc-btn {
-    display: none;
-    position: fixed;
-    bottom: 12px;
-    right: 12px;
-    padding: 6px 12px;
-    font-size: 12px;
-    background: #4f7cff;
-    color: #fff;
-    border-radius: 8px;
-    text-decoration: none;
-    z-index: 101;
-}
-
-/* 반응형: 모바일 화면용 */
-@media screen and (max-width: 768px) {
-    .search-box input[type="text"] { width: 180px; }
-    .top-bar a { padding: 6px 12px; font-size: 14px; }
-    .search-box a.home-btn { padding: 8px 12px; font-size: 14px; }
-    .search-box button { padding: 8px 12px; font-size: 14px; }
-    .pc-btn { display: block; } /* 모바일에서 하단 표시 */
-}
-</style>
-</head>
-<body class="{% if session.get('mode') == 'pc' %}pc-mode{% else %}mobile-mode{% endif %}">
-
-<!-- 상단 바: 설문 버튼 오른쪽 -->
+<!-- 상단 바 -->
 <div class="top-bar">
     <a href="{{ url_for('survey') }}">설문으로 여행지 추천받기</a>
 </div>
 
-<!-- 중앙 검색창 + 홈 버튼 -->
+<!-- 중앙 검색 영역 -->
 <div class="search-container">
     <form class="search-box" action="{{ url_for('search') }}" method="get">
         <a href="{{ url_for('home') }}" class="home-btn">홈</a>
-        <input type="text" name="q" placeholder="도시를 검색하세요..." required>
+        <input
+            type="text"
+            name="q"
+            placeholder="도시를 검색하세요..."
+            required
+        >
         <button type="submit">검색</button>
     </form>
 </div>
 
 
-
-</body>
-</html>
+{% endblock %}
