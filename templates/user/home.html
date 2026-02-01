@@ -2,10 +2,6 @@
 
 {% block title %}홈 | 여행 추천{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-{% endblock %}
-
 {% block content %}
 
 <!-- 상단 바 -->
@@ -13,19 +9,22 @@
     <a href="{{ url_for('survey') }}">설문으로 여행지 추천받기</a>
 </div>
 
-<!-- 중앙 검색 영역 -->
-<div class="search-container">
-    <form class="search-box" action="{{ url_for('search') }}" method="get">
-        <a href="{{ url_for('home') }}" class="home-btn">홈</a>
-        <input
-            type="text"
-            name="q"
-            placeholder="도시를 검색하세요..."
-            required
-        >
-        <button type="submit">검색</button>
-    </form>
-</div>
+<div class="page">
+    <!-- 중앙 검색 영역 -->
+    <div class="center-container">
+        <form class="search-box" action="{{ url_for('search') }}" method="get">
+            <a href="{{ url_for('home') }}" class="btn">홈</a>
 
+            <input
+                type="text"
+                name="q"
+                placeholder="도시를 검색하세요..."
+                required
+            >
+
+            <button type="submit" class="btn">검색</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

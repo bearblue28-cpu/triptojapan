@@ -1,13 +1,24 @@
 /* =============================
-   공용 스타일
+   GLOBAL (Mobile First)
    ============================= */
-body {
-    margin: 0;
-    font-family: 'Pretendard', sans-serif;
-    background: #f5f6f8;
+
+* {
+    box-sizing: border-box;
 }
 
-/* 상단 바 */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f9fafb;
+    color: #111;
+}
+
+/* =============================
+   TOP BAR (Global)
+   ============================= */
+
 .top-bar {
     display: flex;
     justify-content: flex-end;
@@ -20,6 +31,7 @@ body {
     top: 0;
     z-index: 100;
 }
+
 .top-bar a {
     text-decoration: none;
     color: #4f7cff;
@@ -28,78 +40,185 @@ body {
     border-radius: 12px;
     background: #eef2ff;
     transition: 0.2s;
+    white-space: nowrap;
 }
+
 .top-bar a:hover {
     background: #d6e0ff;
 }
 
-/* 중앙 검색창 */
-.search-container {
-    height: 100vh;
+/* =============================
+   PAGE WRAPPER
+   ============================= */
+
+.page {
+    padding-top: 64px; /* top-bar 높이 */
+    min-height: 100vh;
+}
+
+/* =============================
+   HOME / CENTER LAYOUT
+   ============================= */
+
+.center-container {
+    min-height: calc(100vh - 64px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .search-box {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.search-box a.home-btn {
+
+/* =============================
+   BUTTONS
+   ============================= */
+
+.btn {
     text-decoration: none;
     padding: 12px 16px;
     border-radius: 12px;
     background: #4f7cff;
     color: #fff;
     font-weight: 600;
-    transition: 0.2s;
+    border: none;
+    cursor: pointer;
 }
-.search-box a.home-btn:hover {
+
+.btn:hover {
     background: #3563d6;
 }
-.search-box input[type="text"] {
-    width: 400px;
+
+/* =============================
+   INPUT
+   ============================= */
+
+input[type="text"] {
+    width: 240px;
     max-width: 80vw;
     padding: 12px 16px;
     border-radius: 12px;
     border: 1px solid #ccc;
     font-size: 16px;
 }
-.search-box button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    background: #4f7cff;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
+
+/* =============================
+   MOBILE TUNING (Minimal)
+   ============================= */
+
+@media screen and (max-width: 768px) {
+    input[type="text"] {
+        width: 180px;
+    }
+
+    .top-bar a,
+    .btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
 }
-.search-box button:hover {
+/* =============================
+   CARD UI
+   ============================= */
+
+.card {
+    background: #fff;
+    padding: 28px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.card h3 {
+    margin: 12px 0 24px;
+    font-size: 18px;
+    color: #4f7cff;
+}
+
+/* =============================
+   BUTTON VARIANTS
+   ============================= */
+
+.btn-primary {
+    background: #4f7cff;
+}
+
+.btn-primary:hover {
     background: #3563d6;
 }
 
-/* 반응형 모바일 화면 조정 */
-@media screen and (max-width: 768px) {
-    body { font-size: 14px; }
+.btn-success {
+    background: #4fcf7c;
+    margin-top: 12px;
+}
 
-    .search-box input[type="text"] {
-        width: 200px;
-    }
+.btn-success:hover {
+    background: #38a567;
+}
+/* =============================
+   RECOMMEND LIST
+   ============================= */
 
-    .top-bar a {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
+.content {
+    padding: 16px;
+}
 
-    .search-box a.home-btn {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
+.header {
+    margin-bottom: 20px;
+}
 
-    .search-box button {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
+.header h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
 
+.link-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* 카드 안 텍스트 */
+.city {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.highlights {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.percent {
+    font-size: 13px;
+    color: #4f7cff;
+    font-weight: 600;
+}
+/* 추천 리스트 중앙 정렬 */
+.recommend-list {
+    max-width: 520px;
+    margin: 0 auto;
+}
+.recommend-list .card {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
 }
