@@ -1,60 +1,1294 @@
 [
   {
-    "city": "도쿄",
-    "description": "최신 트렌드와 전통 문화",
-    "scores": {
-      "R": 2,
-      "A": 5,
-      "C": 4,
-      "F": 4,
-      "N": 0,
-      "P": 1,
-      "S": 3
-    },
-    "districts": {
-      "신주쿠": {
-        "description": "번화가 중심",
-        "attractions": {
-          "신주쿠 공원": {
-            "description": "",
-            "tags": [
-              "산책",
-              "여유",
-              "현지 여행"
-            ],
-            "background": []
+    "region": "간토",
+    "cities": [
+      {
+        "city": "가나가와",
+        "description": "현대적 도시 매력과 자연·온천이 어우러진 다채로운 도시",
+        "scores": {
+          "R": 53,
+          "A": 51,
+          "C": 65,
+          "F": 54,
+          "N": 67,
+          "P": 68,
+          "I": 63,
+          "S": 71
+        },
+        "views": 5,
+        "districts": {
+          "요코하마": {
+            "description": "현대적 도시 풍경과 항구의 야경, 다양한 먹거리와 쇼핑이 어우러진 활기찬 도시",
+            "views": 5,
+            "attractions": {},
+            "scores": {
+              "R": 35,
+              "A": 75,
+              "C": 50,
+              "F": 75,
+              "N": 30,
+              "P": 25,
+              "I": 85,
+              "S": 100
+            },
+            "rating": null,
+            "images": {
+              "main": "75d118c3-ff5e-4485-a9e0-349c38974cbb_yokohama.jpg"
+            }
+          },
+          "가와사키": {
+            "description": "산업과 문화가 혼재된 도시, 독특한 박물관과 공업 지대 탐방이 흥미로운 곳",
+            "views": 2,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 35,
+              "C": 5,
+              "F": 25,
+              "N": 5,
+              "P": 35,
+              "I": 35,
+              "S": 60
+            },
+            "rating": null,
+            "images": {}
+          },
+          "가마쿠라": {
+            "description": "고즈넉한 사찰과 역사적 명소, 해변과 함께 일본 전통과 자연을 느낄 수 있는 지역",
+            "views": 1,
+            "attractions": {},
+            "scores": {
+              "R": 35,
+              "A": 20,
+              "C": 95,
+              "F": 50,
+              "N": 65,
+              "P": 90,
+              "I": 65,
+              "S": 15
+            },
+            "rating": null,
+            "images": {
+              "main": "kamakura.jpg"
+            }
+          },
+          "미우라반도": {
+            "description": "바다와 어촌의 풍경, 신선한 해산물과 한적한 해변을 즐길 수 있는 휴식처",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 45,
+              "A": 20,
+              "C": 30,
+              "F": 20,
+              "N": 50,
+              "P": 55,
+              "I": 15,
+              "S": 20
+            },
+            "rating": null,
+            "images": {}
+          },
+          "하코네": {
+            "description": "온천과 자연, 미술관과 화산 경관이 조화를 이루는 일본 대표 힐링 여행지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 75,
+              "A": 15,
+              "C": 35,
+              "F": 15,
+              "N": 90,
+              "P": 65,
+              "I": 40,
+              "S": 35
+            },
+            "rating": null,
+            "images": {}
           }
+        },
+        "region": "간토",
+        "rating": null,
+        "images": {
+          "main": "75d118c3-ff5e-4485-a9e0-349c38974cbb_yokohama.jpg"
         }
+      },
+      {
+        "city": "지바",
+        "description": "넓은 해안선과 자연, 디즈니와 같은 테마파크, 전통과 현대가 조화를 이루는 다채로운 도시",
+        "scores": {
+          "R": 54,
+          "A": 69,
+          "C": 40,
+          "F": 26,
+          "N": 60,
+          "P": 67,
+          "I": 60,
+          "S": 34
+        },
+        "views": 5,
+        "districts": {
+          "지바만 지역": {
+            "description": " 도쿄의 위성 도시이자 대형 이벤트·쇼핑 중심의 실용적인 도시형 관광지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 25,
+              "A": 100,
+              "C": 25,
+              "F": 25,
+              "N": 5,
+              "P": 90,
+              "I": 60,
+              "S": 40
+            },
+            "rating": null,
+            "images": {}
+          },
+          "나리타 & 인근 지역": {
+            "description": "공항 도시를 넘어, 깊은 사찰 문화와 전통 거리 산책이 살아 있는 의외의 역사 관광지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 25,
+              "A": 10,
+              "C": 45,
+              "F": 25,
+              "N": 65,
+              "P": 55,
+              "I": 60,
+              "S": 35
+            },
+            "rating": null,
+            "images": {}
+          },
+          "구주쿠리 & 초시": {
+            "description": "태평양이 펼쳐진 장대한 해안선과 어촌 풍경이 매력인, 바다 중심 자연 여행지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 70,
+              "A": 45,
+              "C": 5,
+              "F": 25,
+              "N": 60,
+              "P": 55,
+              "I": 40,
+              "S": 20
+            },
+            "rating": null,
+            "images": {}
+          },
+          "기사라즈와 그 주변": {
+            "description": "도쿄만과 접한 해안·아울렛·온천이 결합된 드라이브형 근교 관광지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 45,
+              "A": 50,
+              "C": 50,
+              "F": 30,
+              "N": 45,
+              "P": 55,
+              "I": 60,
+              "S": 20
+            },
+            "rating": null,
+            "images": {}
+          },
+          "보소반도": {
+            "description": "산과 바다, 소도시와 자연이 어우러진, 느리게 머무는 체류형 힐링 여행지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 55,
+              "A": 30,
+              "C": 30,
+              "F": 10,
+              "N": 65,
+              "P": 55,
+              "I": 60,
+              "S": 35
+            },
+            "rating": null,
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "rating": null,
+        "images": {
+          "main": "2e7f7ed1-a344-4d6b-92aa-7508d4bc3c88_chiba.jpg"
+        }
+      },
+      {
+        "city": "도쿄",
+        "description": "최신 트렌드와 전통 문화가 공존하는 대도시이자 일본의 심장부",
+        "scores": {
+          "R": 42,
+          "A": 48,
+          "C": 61,
+          "F": 48,
+          "N": 60,
+          "P": 65,
+          "I": 71,
+          "S": 86
+        },
+        "views": 14,
+        "districts": {
+          "고쿄 & 도쿄역": {
+            "description": "황궁과 역사 명소가 밀집한 전통과 현대가 공존하는 지역",
+            "views": 7,
+            "attractions": {
+              "고쿄(황거)": {
+                "description": "일본 왕실과 역사, 정원과 성곽 풍경을 조용히 느낄 수 있는 도심 속 힐링 명소",
+                "tags": [
+                  "역사",
+                  "성",
+                  "전통건축",
+                  "일본정원",
+                  "계절풍경",
+                  "벚꽃명소",
+                  "힐링여행",
+                  "도심속자연",
+                  "산책"
+                ],
+                "background": [],
+                "scores": {
+                  "R": 0,
+                  "A": 0,
+                  "C": 0,
+                  "F": 0,
+                  "N": 0,
+                  "P": 0,
+                  "S": 0,
+                  "I": 0
+                },
+                "views": 2,
+                "rating": null
+              },
+              "마루노우치": {
+                "description": "도쿄역의 레트로 건축과 초고층 오피스 빌딩, 세련된 거리와 상업시설이 공존하는 도쿄식 도시 명소",
+                "tags": [
+                  "산책",
+                  "도시",
+                  "레트로",
+                  "초고층빌딩",
+                  "비즈니스",
+                  "쇼핑",
+                  "카페투어",
+                  "레스토랑",
+                  "포토스팟",
+                  "도보여행",
+                  "거리사진"
+                ],
+                "background": [
+                  "너의이름은"
+                ],
+                "scores": {
+                  "R": 0,
+                  "A": 0,
+                  "C": 0,
+                  "F": 0,
+                  "N": 0,
+                  "P": 0,
+                  "S": 0,
+                  "I": 0
+                },
+                "views": 7,
+                "rating": null
+              }
+            },
+            "scores": {
+              "R": 10,
+              "A": 10,
+              "C": 100,
+              "F": 25,
+              "N": 5,
+              "P": 55,
+              "I": 85,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "긴자 & 니혼바시": {
+            "description": "고급 쇼핑과 미식 중심의 관광객 인기 지역",
+            "views": 1,
+            "attractions": {
+              "긴자": {
+                "description": "세계 최고 수준의 쇼핑과 미식, 세련된 거리 풍경이 집약된 도쿄의 대표 럭셔리 관광지",
+                "tags": [
+                  "도쿄중심",
+                  "럭셔리여행",
+                  "고급상권",
+                  "세련된도시",
+                  "쇼핑",
+                  "고급레스토랑",
+                  "스시",
+                  "디저트맛집",
+                  "카페투어",
+                  "거리산책",
+                  "아이쇼핑",
+                  "야경",
+                  "포토스팟",
+                  "거리사진"
+                ],
+                "background": [
+                  "신 고지라"
+                ],
+                "scores": {
+                  "R": 0,
+                  "A": 0,
+                  "C": 0,
+                  "F": 0,
+                  "N": 0,
+                  "P": 0,
+                  "S": 0,
+                  "I": 0
+                },
+                "views": 0,
+                "rating": null
+              },
+              "니혼바시": {
+                "description": "에도 시대 상업의 중심에서 현대 금융·문화로 이어지는, 전통과 일상이 자연스럽게 공존하는 도쿄의 뿌리 같은 관광지",
+                "tags": [
+                  "니혼바시다리",
+                  "오카에도",
+                  "전통상점",
+                  "노포",
+                  "일본생활",
+                  "차분한도시",
+                  "생활형관광",
+                  "로컬감성",
+                  "산책",
+                  "도쿄일상",
+                  "우나기",
+                  "소바",
+                  "화과자",
+                  "전통요리",
+                  "문화탐방",
+                  "도시기원",
+                  "사진",
+                  "니혼바시미츠이타워",
+                  "COREDO무로마치",
+                  "전통과 현대"
+                ],
+                "background": [],
+                "scores": {
+                  "R": 0,
+                  "A": 0,
+                  "C": 0,
+                  "F": 0,
+                  "N": 0,
+                  "P": 0,
+                  "S": 0,
+                  "I": 0
+                },
+                "views": 0,
+                "rating": null
+              }
+            },
+            "scores": {
+              "R": 5,
+              "A": 5,
+              "C": 50,
+              "F": 50,
+              "N": 0,
+              "P": 10,
+              "I": 65,
+              "S": 65
+            },
+            "rating": null,
+            "images": {}
+          },
+          "롯폰기 & 아카사카": {
+            "description": "외국인 관광객에게 인기 있는 레스토랑과 바, 현대 미술관이 있는 국제적 감각의 도심 구역",
+            "views": 1,
+            "attractions": {},
+            "scores": {
+              "R": 5,
+              "A": 10,
+              "C": 10,
+              "F": 55,
+              "N": 0,
+              "P": 80,
+              "I": 85,
+              "S": 60
+            },
+            "rating": null,
+            "images": {}
+          },
+          "우에노 & 아키하바라": {
+            "description": "박물관과 공원, 애니메이션과 전자상가가 공존하는 오타쿠들의 성지",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 45,
+              "C": 25,
+              "F": 40,
+              "N": 5,
+              "P": 35,
+              "I": 55,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "아사쿠사": {
+            "description": "센소지와 전통 상점가가 있는 일본 문화 체험 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 5,
+              "A": 45,
+              "C": 100,
+              "F": 30,
+              "N": 0,
+              "P": 80,
+              "I": 85,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "료고쿠": {
+            "description": "스모와 전통 스포츠 문화를 체험할 수 있는 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 10,
+              "C": 45,
+              "F": 10,
+              "N": 0,
+              "P": 35,
+              "I": 20,
+              "S": 60
+            },
+            "rating": null,
+            "images": {}
+          },
+          "도쿄 돔 & 주변": {
+            "description": "야구, 콘서트 등 엔터테인먼트 중심의 가족 관광 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 75,
+              "C": 45,
+              "F": 25,
+              "N": 5,
+              "P": 90,
+              "I": 40,
+              "S": 20
+            },
+            "rating": null,
+            "images": {}
+          },
+          "이케부쿠로": {
+            "description": "젊은층과 서브컬처, 쇼핑 중심의 활기 있는 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 0,
+              "A": 45,
+              "C": 10,
+              "F": 25,
+              "N": 0,
+              "P": 20,
+              "I": 65,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "신주쿠": {
+            "description": "신주쿠 교엔과 번화가가 공존하는 도심 복합 관광 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 45,
+              "C": 10,
+              "F": 60,
+              "N": 5,
+              "P": 40,
+              "I": 85,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "하라주쿠 & 오모테산도": {
+            "description": "패션과 트렌드 문화, 젊은 관광객이 많은 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 0,
+              "A": 45,
+              "C": 45,
+              "F": 55,
+              "N": 5,
+              "P": 45,
+              "I": 65,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "시부야 & 시모키타자와": {
+            "description": "스크램블 교차로와 젊은층 문화가 중심인 활기 있는 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 30,
+              "C": 45,
+              "F": 65,
+              "N": 0,
+              "P": 100,
+              "I": 85,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "오다이바": {
+            "description": "해양, 쇼핑, 엔터테인먼트가 결합된 관광 복합 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 40,
+              "A": 45,
+              "C": 25,
+              "F": 30,
+              "N": 35,
+              "P": 35,
+              "I": 65,
+              "S": 75
+            },
+            "rating": null,
+            "images": {}
+          },
+          "나카메구로": {
+            "description": "운하와 카페, 산책과 힐링을 즐기기 좋은 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 5,
+              "C": 5,
+              "F": 70,
+              "N": 0,
+              "P": 0,
+              "I": 40,
+              "S": 65
+            },
+            "rating": null,
+            "images": {}
+          },
+          "도쿄 타워 & 주변": {
+            "description": "도쿄 상징 전망대와 주변 문화시설이 있는 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 5,
+              "A": 0,
+              "C": 65,
+              "F": 50,
+              "N": 5,
+              "P": 35,
+              "I": 100,
+              "S": 100
+            },
+            "rating": null,
+            "images": {}
+          },
+          "하네다 공항 주변": {
+            "description": "공항과 쇼핑 중심, 관광 목적보다 이동 중심 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 5,
+              "C": 5,
+              "F": 5,
+              "N": 0,
+              "P": 15,
+              "I": 0,
+              "S": 40
+            },
+            "rating": null,
+            "images": {}
+          },
+          "도쿄 수도권": {
+            "description": "자연, 산, 놀이공원 등이 어우러진 가족·힐링 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 70,
+              "A": 70,
+              "C": 10,
+              "F": 10,
+              "N": 25,
+              "P": 55,
+              "I": 40,
+              "S": 75
+            },
+            "rating": null,
+            "images": {}
+          },
+          "도쿄의 섬들": {
+            "description": "청정 자연과 해양 액티비티가 뛰어난 세계적 힐링 지역",
+            "views": 0,
+            "attractions": {},
+            "scores": {
+              "R": 65,
+              "A": 25,
+              "C": 55,
+              "F": 20,
+              "N": 95,
+              "P": 80,
+              "I": 45,
+              "S": 0
+            },
+            "rating": null,
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "rating": null,
+        "images": {
+          "main": "41fdd983-2c64-4f09-a6bf-6bbbe8bc1a46_tokyo.jpg"
+        }
+      },
+      {
+        "city": "사이타마",
+        "description": "도쿄 근교에서 전통 거리와 자연, 도시 편의를 고루 즐길 수 있는 실속형 근교 여행지",
+        "scores": {
+          "R": 48,
+          "A": 37,
+          "C": 43,
+          "F": 36,
+          "N": 71,
+          "P": 52,
+          "I": 47,
+          "S": 53
+        },
+        "rating": null,
+        "views": 4,
+        "districts": {
+          "치치부": {
+            "description": "장엄한 산과 사계절 꽃, 겨울밤을 밝히는 수레 축제가 빛나는 자연 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 70,
+              "A": 40,
+              "C": 40,
+              "F": 40,
+              "N": 95,
+              "P": 40,
+              "I": 40,
+              "S": 20
+            },
+            "images": {}
+          },
+          "가와고에": {
+            "description": "에도 감성이 살아 있는 전통 거리와 먹거리로 가득한 작은 시간여행 도시",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 45,
+              "C": 60,
+              "F": 45,
+              "N": 10,
+              "P": 75,
+              "I": 65,
+              "S": 55
+            },
+            "images": {}
+          },
+          "도코로자와": {
+            "description": "테마파크와 문화 복합공간이 어우러진 가족·서브컬처 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 30,
+              "C": 10,
+              "F": 10,
+              "N": 10,
+              "P": 35,
+              "I": 20,
+              "S": 60
+            },
+            "images": {}
+          },
+          "사이타마 뉴 어번 센터": {
+            "description": "대형 공연과 철도박물관이 있는 사이타마의 핵심 도시 거점",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 5,
+              "A": 10,
+              "C": 25,
+              "F": 10,
+              "N": 5,
+              "P": 35,
+              "I": 20,
+              "S": 55
+            },
+            "images": {}
+          },
+          "구마가야": {
+            "description": "넓은 하천과 계절 축제가 어우러진 여유로운 지역 도시",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 25,
+              "A": 10,
+              "C": 20,
+              "F": 15,
+              "N": 20,
+              "P": 35,
+              "I": 40,
+              "S": 20
+            },
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "images": {}
+      },
+      {
+        "city": "이바라키",
+        "description": "태평양 절경과 꽃의 명소, 전통 정원이 어우러진 자연 감성 여행지",
+        "scores": {
+          "R": 32,
+          "A": 38,
+          "C": 12,
+          "F": 50,
+          "N": 51,
+          "P": 38,
+          "I": 50,
+          "S": 27
+        },
+        "rating": null,
+        "views": 4,
+        "districts": {
+          "미토": {
+            "description": "일본 3대 정원과 전통이 살아 숨 쉬는 이바라키의 역사 중심지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 30,
+              "C": 10,
+              "F": 40,
+              "N": 70,
+              "P": 20,
+              "I": 60,
+              "S": 20
+            },
+            "images": {}
+          },
+          "오아라이 & 히타치나카": {
+            "description": "태평양 절경과 꽃의 바다가 펼쳐지는 해안 감성 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 35,
+              "A": 50,
+              "C": 0,
+              "F": 65,
+              "N": 30,
+              "P": 45,
+              "I": 40,
+              "S": 20
+            },
+            "images": {}
+          },
+          "스이고": {
+            "description": "수로와 갈대밭이 어우러진 한적한 전통 수향 마을",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 30,
+              "A": 5,
+              "C": 15,
+              "F": 20,
+              "N": 25,
+              "P": 40,
+              "I": 40,
+              "S": 15
+            },
+            "images": {}
+          },
+          "쓰쿠바": {
+            "description": "과학 도시와 츠쿠바산 자연이 공존하는 현대적 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 20,
+              "A": 25,
+              "C": 10,
+              "F": 25,
+              "N": 20,
+              "P": 20,
+              "I": 45,
+              "S": 35
+            },
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "images": {}
+      },
+      {
+        "city": "도치기",
+        "description": "",
+        "scores": {
+          "R": 60,
+          "A": 38,
+          "C": 51,
+          "F": 39,
+          "N": 72,
+          "P": 53,
+          "I": 55,
+          "S": 50
+        },
+        "rating": null,
+        "views": 4,
+        "districts": {
+          "닛코": {
+            "description": "세계유산 신사와 웅장한 폭포가 어우러진 도치기의 대표 관광지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 20,
+              "A": 5,
+              "C": 70,
+              "F": 20,
+              "N": 90,
+              "P": 65,
+              "I": 60,
+              "S": 20
+            },
+            "images": {}
+          },
+          "나스": {
+            "description": "고원 리조트와 온천, 자연 속 휴식이 펼쳐지는 힐링 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 75,
+              "A": 45,
+              "C": 25,
+              "F": 35,
+              "N": 65,
+              "P": 35,
+              "I": 40,
+              "S": 15
+            },
+            "images": {}
+          },
+          "우쓰노미야": {
+            "description": "교자(만두)의 도시’로 불리는 도치기의 미식 중심지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 10,
+              "A": 40,
+              "C": 25,
+              "F": 50,
+              "N": 25,
+              "P": 50,
+              "I": 60,
+              "S": 65
+            },
+            "images": {}
+          },
+          "마시코": {
+            "description": "전통 도자기와 공방 문화가 살아 있는 예술 감성 마을",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 55,
+              "A": 20,
+              "C": 20,
+              "F": 15,
+              "N": 5,
+              "P": 20,
+              "I": 0,
+              "S": 40
+            },
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "images": {}
+      },
+      {
+        "city": "군마",
+        "description": "일본 최고급 온천과 웅장한 산악 자연이 살아 있는, 간토 최고의 힐링·자연 특화 여행지",
+        "scores": {
+          "R": 44,
+          "A": 46,
+          "C": 32,
+          "F": 41,
+          "N": 72,
+          "P": 46,
+          "I": 38,
+          "S": 45
+        },
+        "rating": null,
+        "views": 4,
+        "districts": {
+          "구사츠": {
+            "description": "일본 최고급 온천과 유바타케가 빛나는 군마 대표 온천 여행지",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 60,
+              "A": 20,
+              "C": 40,
+              "F": 45,
+              "N": 65,
+              "P": 55,
+              "I": 35,
+              "S": 55
+            },
+            "images": {}
+          },
+          "다카사키": {
+            "description": "다루마와 파스타로 유명한 군마의 관문 도시",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 25,
+              "A": 10,
+              "C": 10,
+              "F": 45,
+              "N": 20,
+              "P": 10,
+              "I": 20,
+              "S": 35
+            },
+            "images": {}
+          },
+          "미나카미": {
+            "description": "급류 래프팅과 온천이 어우러진 액티비티 천국",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 15,
+              "A": 60,
+              "C": 25,
+              "F": 30,
+              "N": 90,
+              "P": 45,
+              "I": 40,
+              "S": 15
+            },
+            "images": {}
+          },
+          "마에바시 & 아카기산": {
+            "description": "아카기산의 대자연과 호수가 펼쳐지는 군마의 중심 도시",
+            "views": 0,
+            "rating": null,
+            "attractions": {},
+            "scores": {
+              "R": 20,
+              "A": 10,
+              "C": 25,
+              "F": 10,
+              "N": 45,
+              "P": 35,
+              "I": 40,
+              "S": 40
+            },
+            "images": {}
+          }
+        },
+        "region": "간토",
+        "images": {}
       }
-    }
+    ]
   },
   {
-    "city": "후쿠오카 ",
-    "description": "규슈의 관문이자 여유로운 분위기의 미식 도시",
-    "scores": {
-      "R": 3,
-      "A": 2,
-      "C": 2,
-      "F": 4,
-      "N": 0,
-      "P": 2,
-      "S": 2
-    },
-    "districts": {
-      "하타카": {
-        "description": "후쿠오카의 중심",
-        "attractions": {
-          "캐널시티": {
-            "description": "후쿠오카의 대표 복합 쇼핑몰",
-            "tags": [
-              "쇼핑",
-              "산책",
-              "미식"
-            ],
-            "background": []
+    "region": "간사이",
+    "cities": [
+      {
+        "city": "오사카",
+        "country": "일본",
+        "views": 26,
+        "description": "맛집 골목과 활기찬 상점가를 오가며, 일본 특유의 에너지와 친근한 분위기를 느낄 수 있는 도시",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "districts": {
+          "오사카 만": {
+            "views": 0,
+            "description": "항구 도시와 여러 어트랙션으로 가득한 에너지 넘치는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "남바": {
+            "views": 0,
+            "description": "쇼핑몰과 엔터테인먼트가 모여, 낮과 밤 모두 활기가 넘치는 오사카 중심지",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "덴노지": {
+            "views": 0,
+            "description": "시텐노지와 아베노 하루카스 등 전통과 현대가 공존하는, 오사카의 문화 탐방 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "오사카시 북부": {
+            "views": 0,
+            "description": "우메다 스카이 빌딩과 고층 전망대에서 세련된 도심 풍경을 즐길 수 있는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "오사카성 주변": {
+            "views": 2,
+            "description": "오사카성을 중심으로 공원 산책과 계절 풍경을 즐기며, 일본 역사와 자연을 함께 느낄 수 있는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {
+              "main": "osaka_catsle.jpg"
+            }
+          },
+          "사카이 & 기시와다": {
+            "views": 0,
+            "description": "전통 시장과 바닷가를 거닐며, 고대 무덤과 역사 유적이 어우러진 오사카 교외의 소박한 매력을 느낄 수 있는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "도톤보리 & 신사이바시": {
+            "views": 0,
+            "description": "글리코 사인과 길거리 음식 골목을 거닐며, 오사카의 에너지와 먹거리를 만끽할 수 있는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
+          },
+          "이케다": {
+            "views": 0,
+            "description": "상점가와 골목을 걸으며, 현지인의 평범한 일상과 오사카 특유의 친근함을 느낄 수 있는 지역",
+            "attractions": {},
+            "rating": null,
+            "images": {}
           }
+        },
+        "region": "간사이",
+        "rating": null,
+        "images": {
+          "main": "f2ef738b-73c8-4a32-b5ed-3fddd16906de_osaka.jpg"
+        }
+      },
+      {
+        "city": "교토",
+        "country": "일본",
+        "views": 26,
+        "description": "일본 천년의 고도이자 전통 문화와 사찰이 살아있는 역사 도시",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "districts": {},
+        "region": "간사이",
+        "rating": null,
+        "images": {
+          "main": "3ea305a0-263d-4184-87a7-d828d17ea360_kyoto.jpg"
+        }
+      },
+      {
+        "city": "시가",
+        "description": "거대한 비와호를 품은, 잔잔하지만 은근히 깊이 있는 역사·자연형 여행지",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "rating": null,
+        "views": 0,
+        "image": null,
+        "districts": {}
+      },
+      {
+        "city": "효고",
+        "description": "히메지성부터 고베 항구 감성까지, 도시·온천·성곽을 모두 즐길 수 있는 여행지",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "rating": null,
+        "views": 0,
+        "image": null,
+        "districts": {}
+      },
+      {
+        "city": "나라",
+        "description": "도다이지와 사슴이 상징하는, 일본 고대사의 정수를 가장 직관적으로 느낄 수 있는 곳",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "rating": null,
+        "views": 0,
+        "image": null,
+        "districts": {}
+      },
+      {
+        "city": "와카야마",
+        "description": "구마노 고도와 바다 절경이 어우러진, 조용하지만 묵직한 힐링형 여행지",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "rating": null,
+        "views": 0,
+        "image": null,
+        "districts": {}
+      }
+    ]
+  },
+  {
+    "region": "규슈",
+    "cities": [
+      {
+        "city": "후쿠오카 ",
+        "description": "규슈의 관문이자 여유로운 분위기의 미식 도시",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "views": 0,
+        "districts": {},
+        "region": "규슈",
+        "rating": null,
+        "images": {
+          "main": "249bb174-f64d-4484-b7b9-f621da3a8864_fukuoka.jpg"
         }
       }
-    }
+    ]
+  },
+  {
+    "region": "홋카이도",
+    "cities": []
+  },
+  {
+    "region": "시코쿠",
+    "cities": []
+  },
+  {
+    "region": "호쿠리쿠 신에쓰",
+    "cities": []
+  },
+  {
+    "region": "오키나와",
+    "cities": [
+      {
+        "city": "오키나와",
+        "description": "",
+        "scores": {
+          "R": 0,
+          "A": 0,
+          "C": 0,
+          "F": 0,
+          "N": 0,
+          "P": 0,
+          "I": 0,
+          "S": 0
+        },
+        "rating": null,
+        "views": 0,
+        "image": null,
+        "districts": {},
+        "images": {
+          "main": "okinawa.jpg"
+        },
+        "region": "오키나와"
+      }
+    ]
+  },
+  {
+    "region": "주고쿠",
+    "cities": []
+  },
+  {
+    "region": "도호쿠",
+    "cities": []
+  },
+  {
+    "region": "도카이",
+    "cities": []
   }
 ]

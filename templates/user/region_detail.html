@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ region.region }} | 지역 상세</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Pretendard', sans-serif; background: #f5f6f8; margin: 0; padding: 0; }
+.container { max-width: 800px; margin: 60px auto; padding: 0 20px; text-align: center; }
+.city-card { display: block; margin: 20px 0; padding: 18px; background: #fff; border-radius: 14px; text-decoration: none; color: #4f7cff; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: background 0.2s; }
+.city-card:hover { background: #eef2ff; }
+.sort-bar { text-align: left; margin: 20px 0; display: flex; gap: 10px; justify-content: flex-start; }
+.sort-btn { padding: 6px 12px; border-radius: 8px; border: none; background: #eef2ff; color: #4f7cff; font-weight: 600; cursor: pointer; }
+.sort-btn:hover { background: #d0e0ff; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ region.region }}</h1>
+
+    <div class="sort-bar">
+        <button class="sort-btn" onclick="sortCities('name')">가나다순</button>
+        <button class="sort-btn" onclick="sortCities('views')">조회수순</button>
+    </div>
+
+    <div id="city-list">
+        {% for city in region.cities %}
+            <a href="{{ url_for('city_detail', city_name=city.city) }}" class="city-card" data-name="{{ city.city }}" data-views="{{ city.views }}">
+                {{ city.city }} - {{ city.description }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function sortCities(type) {
+    const container = document.getElementById('city-list');
+    const cities = Array.from(container.children);
+    cities.sort((a,b) => {
+        if(type==='name') return a.dataset.name.localeCompare(b.dataset.name,'ko');
+        if(type==='views') return b.dataset.views - a.dataset.views;
+        return 0;
+    });
+    cities.forEach(c => container.appendChild(c));
+}
+</script>
+</body>
+</html>

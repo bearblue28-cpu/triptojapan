@@ -3,116 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 대시보드</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-body { font-family:sans-serif; background:#f5f6f8; margin:0; padding:20px; }
-h1 { text-align:center; }
-.container { max-width:1000px; margin:0 auto; }
-.card { background:#fff; padding:16px; border-radius:12px; margin-bottom:20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
-.card h2 { margin:0; display:flex; justify-content:space-between; }
-.card form { display:inline; }
-.button { padding:4px 8px; margin-left:4px; border:none; border-radius:6px; cursor:pointer; }
-.add-btn { background:#4f7cff; color:#fff; }
-.delete-btn { background:#ff4d4f; color:#fff; }
-.edit-btn { background:#ffa500; color:#fff; }
+body {
+  font-family: 'Pretendard', sans-serif;
+  background: #f5f6f8;
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.city-section {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+.item {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+a.delete {
+  color: red;
+  text-decoration: none;
+}
+a.delete:hover {
+  text-decoration: underline;
+}
+.score-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.score-group input {
+  width: 55px;
+}
+.checklist {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fafafa;
+  margin-top: 15px;
+}
+.category {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ddd;
+}
+.category h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+.score-value {
+  font-weight: bold;
+}
+select, input, button {
+  margin: 4px 0;
+}
 </style>
 </head>
-<body>
-<h1>관리자 대시보드</h1>
-<div class="container">
 
-<!-- 도시 추가 -->
-<div class="card">
-<h2>도시 추가</h2>
-<form method="POST" action="{{ url_for('admin.add_city') }}">
-    도시명: <input type="text" name="city" required>
-    설명: <input type="text" name="description">
-    <!-- 점수 입력 -->
-    R: <input type="number" name="R" min="0" max="5" value="0">
-    A: <input type="number" name="A" min="0" max="5" value="0">
-    C: <input type="number" name="C" min="0" max="5" value="0">
-    F: <input type="number" name="F" min="0" max="5" value="0">
-    N: <input type="number" name="N" min="0" max="5" value="0">
-    P: <input type="number" name="P" min="0" max="5" value="0">
-    S: <input type="number" name="S" min="0" max="5" value="0">
-    <button class="button add-btn" type="submit">추가</button>
-</form>
+<body>
+<div class="container">
+<h1>관리자 대시보드</h1>
+
+<!-- ================= 지역 / 도시 추가 ================= -->
+<div class="section">
+  <h2>지역 / 도시 관리</h2>
+
+  <!-- 지역 추가 -->
+  <form action="{{ url_for('admin.add_region') }}" method="POST" style="margin-bottom:12px;">
+    <input type="text" name="region_name" placeholder="지역 이름" required>
+    <button type="submit">➕ 지역 추가</button>
+  </form>
+
+  <!-- 도시 추가 -->
+  <form action="{{ url_for('admin.add_city') }}" method="POST">
+    <select name="region" required>
+      {% for region in regions %}
+        <option value="{{ region.region }}">{{ region.region }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" name="city" placeholder="도시 이름" required>
+    <button type="submit">➕ 도시 추가</button>
+  </form>
 </div>
 
-<!-- 기존 도시 리스트 -->
-{% for city in destinations %}
-<div class="card">
+<!-- ================= 도시 필터 ================= -->
+<div class="section">
+  <h2>도시 필터</h2>
+  <select id="city-filter">
+    <option value="all" {% if selected_city == 'all' %}selected{% endif %}>전체 도시</option>
+    {% for city_name in all_cities %}
+      <option value="{{ city_name }}" {% if city_name == selected_city %}selected{% endif %}>
+        {{ city_name }}
+      </option>
+    {% endfor %}
+  </select>
+</div>
+
+<!-- ================= 지역 / 도시 ================= -->
+{% for region in regions %}
 <h2>
-    {{ city.city }}
-    <span>
-        <form method="GET" action="{{ url_for('admin.delete_city', city_name=city.city) }}">
-            <button class="button delete-btn" type="submit">삭제</button>
-        </form>
-    </span>
+  지역: {{ region.region }}
+  <a href="{{ url_for('admin.delete_region', region_name=region.region) }}"
+     class="delete"
+     style="margin-left:10px;"
+     onclick="return confirm('정말 삭제하시겠습니까?')">
+     지역 삭제
+  </a>
 </h2>
-<p><strong>설명:</strong> {{ city.description }}</p>
 
-<!-- 구/지구 추가 -->
-<form method="POST" action="{{ url_for('admin.add_district', city_name=city.city) }}">
-    구/지구명: <input type="text" name="district" required>
-    설명: <input type="text" name="description">
-    <button class="button add-btn" type="submit">추가</button>
-</form>
+{% for city in region.cities %}
+{% if selected_city == 'all' or selected_city == city.city %}
+<div class="city-section">
 
-<!-- 구/지구 리스트 -->
-{% for d_name, district in city.districts.items() %}
-<div style="margin-left:20px; margin-top:10px;">
-    <h3>{{ d_name }}
-        <span>
-            <form method="GET" action="{{ url_for('admin.delete_district', city_name=city.city, district_name=d_name) }}" style="display:inline;">
-                <button class="button delete-btn" type="submit">삭제</button>
-            </form>
-        </span>
-    </h3>
-    <form method="POST" action="{{ url_for('admin.edit_district', city_name=city.city, district_name=d_name) }}">
-        설명: <input type="text" name="description" value="{{ district.description }}">
-        <button class="button edit-btn" type="submit">수정</button>
-    </form>
+  <h3>{{ city.city }}</h3>
 
-    <!-- 관광지 추가 -->
-    <form method="POST" action="{{ url_for('admin.add_attraction', city_name=city.city, district_name=d_name) }}">
-        관광지명: <input type="text" name="name" required>
-        관광지 설명: <input type="text" name="description">
-        태그: <input type="text" name="tags" placeholder="콤마로 구분">
-        배경: <input type="text" name="background" placeholder="콤마로 구분">
-        <button class="button add-btn" type="submit">추가</button>
-    </form>
+  <!-- ===== 도시 수정 ===== -->
+  <form action="{{ url_for('admin.edit_city', city_name=city.city) }}"
+        method="POST"
+        enctype="multipart/form-data">
+    <input type="text" name="description" value="{{ city.description }}" placeholder="설명">
+    <input type="file" name="image">
 
-    <!-- 관광지 리스트 -->
-    {% for a_name, attr in district.attractions.items() %}
-    <div style="margin-left:20px; margin-top:5px;">
-        <h4>{{ a_name }}
-            <form method="GET" action="{{ url_for('admin.delete_attraction', city_name=city.city, district_name=d_name, attraction_name=a_name) }}" style="display:inline;">
-                <button class="button delete-btn" type="submit">전체삭제</button>
-            </form>
-        </h4>
-        <p><strong>설명:</strong> {{ attr.description }}
-            {% if attr.description %}
-            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='description') }}">[삭제]</a>
-            {% endif %}
-        </p>
-        <p><strong>태그:</strong> {{ attr.tags|join(', ') }}
-            {% if attr.tags %}
-            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='tags') }}">[삭제]</a>
-            {% endif %}
-        </p>
-        <p><strong>배경:</strong> {{ attr.background|join(', ') }}
-            {% if attr.background %}
-            <a href="{{ url_for('admin.delete_attraction_field', city_name=city.city, district_name=d_name, attraction_name=a_name, field='background') }}">[삭제]</a>
-            {% endif %}
-        </p>
+    {% if city.image %}
+      <div style="margin-top:8px;">
+        <img src="{{ url_for('static', filename='uploads/' ~ city.image) }}"
+            style="width:120px; border-radius:8px;">
+      </div>
+    {% endif %}
+    <div style="display:block; margin-top:6px; font-weight:600;">
+      도시 평점:
+      {% if city.rating is not none %}
+        {{ "%.1f"|format(city.rating) }} / 5.0
+      {% else %}
+        -
+      {% endif %}
+    </div>
+
+    <small style="color:#888;">
+      ※ 도시 평점은 구 평점의 평균으로 자동 계산됩니다
+    </small>
+
+    <div class="score-group">
+      {% for k in ["R","A","C","F","N","P","I","S"] %}
+        <label>{{ k }}</label>
+        <input type="number" value="{{ city.scores.get(k,0)|round(2) }}" readonly>
+      {% endfor %}
+    </div>
+
+    <button type="submit">도시 설명 수정</button>
+  </form>
+
+  <a href="{{ url_for('admin.delete_city', city_name=city.city) }}" class="delete">도시 삭제</a>
+
+  <hr>
+
+  <!-- ===== 구 추가 ===== -->
+  <form action="{{ url_for('admin.add_district', city_name=city.city) }}"
+        method="POST"
+        enctype="multipart/form-data">
+    <input type="text" name="district_name" placeholder="구/구역 이름" required>
+    <input type="text" name="description" placeholder="설명">
+    <input type="file" name="image">
+    <button type="submit">구/구역 추가</button>
+  </form>
+
+  <!-- ===== 구 선택 ===== -->
+  <h4>구 / 지구 선택</h4>
+  <select id="district-filter-{{ city.city|replace(' ','_') }}">
+    {% for d_name in city.districts.keys() %}
+      <option value="{{ d_name }}">{{ d_name }}</option>
+    {% endfor %}
+  </select>
+
+  <!-- ===== 구 점수 체크리스트 ===== -->
+  <form class="checklist"
+        action="{{ url_for('admin.update_district_score', city_name=city.city) }}"
+        method="POST"
+        data-city="{{ city.city|replace(' ','_') }}">
+
+    <input type="hidden"
+           name="district"
+           id="selected-district-{{ city.city|replace(' ','_') }}"
+           value="{{ city.districts.keys()|list|first }}">
+
+    {% for code, cat in checklist.items() %}
+    <div class="category">
+      <h4>{{ code }} ({{ cat.name }})</h4>
+
+      {% for item, val in cat["items"].items() %}
+      <div>
+        <input type="checkbox" class="chk" data-score="{{ val }}">
+        <label>{{ item }} ({{ val }}점)</label>
+      </div>
+      {% endfor %}
+
+      <div>현재 점수: <span class="score-value">0</span></div>
+      <input type="hidden" name="{{ code }}" class="hidden-score" value="0">
     </div>
     {% endfor %}
+
+    <div style="margin-top:8px;">
+      <label>
+        구 평점 (0.0 ~ 5.0)
+        <input
+          type="number"
+          name="district_rating"
+          min="0"
+          max="5"
+          step="0.1"
+          style="width:70px;"
+          value="{{
+            city.districts[
+              city.districts.keys()|list|first
+            ].rating
+            if city.districts and city.districts[
+              city.districts.keys()|list|first
+            ].rating is not none
+            else ''
+          }}"
+        >
+      </label>
+    </div>
+
+    <button type="submit">구 점수 저장</button>
+  </form>
+
+  <!-- ===== 관광지 추가 ===== -->
+  <form method="POST"
+        enctype="multipart/form-data"
+        action="{{ url_for('admin.add_attraction', city_name=city.city, district_name='DUMMY') }}"
+        onsubmit="
+          const d = document.getElementById('district-input-{{ city.city|replace(' ','_') }}').value;
+          if(!d){ alert('구를 선택하세요'); return false; }
+          this.action = this.action.replace('DUMMY', encodeURIComponent(d));
+        ">
+    <input type="hidden" id="district-input-{{ city.city|replace(' ','_') }}">
+    <input type="text" name="name" placeholder="관광지 이름" required>
+    <input type="text" name="description" placeholder="설명">
+    <input type="text" name="tags" placeholder="태그">
+    <input type="text" name="background" placeholder="배경">
+    <input type="file" name="image">
+    <button type="submit">관광지 추가</button>
+  </form>
+
+  <!-- ===== 구 / 관광지 목록 ===== -->
+  {% for d_name, district in city.districts.items() %}
+  <div class="item">
+    <div>
+      <strong>{{ d_name }}</strong>
+
+      <!-- 🔥 여기 추가 -->
+      <form action="{{ url_for('admin.upload_district_image',
+              city_name=city.city,
+              district_name=d_name) }}"
+            method="post"
+            enctype="multipart/form-data"
+            style="margin-top:6px;">
+
+        <input type="file" name="image" required>
+        <button type="submit" style="font-size:12px;">
+            📷 사진 변경
+        </button>
+      </form>
+
+      {% if district.images and district.images.main %}
+        <div>
+          <img src="{{ url_for('static',
+                  filename='uploads/' ~ district.images.main) }}"
+               style="width:100px; border-radius:8px;">
+        </div>
+      {% endif %}
+
+      <span style="margin-left:6px; font-weight:600;
+            color: {{ '#2563eb' if district.rating is not none else '#999' }};">
+        (평점 {{ "%.1f"|format(district.rating) if district.rating is not none else '-' }})
+      </span>
+    </div>
+    <a href="{{ url_for('admin.delete_district',
+                        city_name=city.city,
+                        district_name=d_name) }}"
+      class="delete">
+      삭제
+    </a>
+  </div>
+
+    {% for a_name, attr in district.attractions.items() %}
+    <div class="item">
+      <span>{{ a_name }}</span>
+      {% if attr.image %}
+        <div>
+          <img src="{{ url_for('static', filename='uploads/' ~ attr.image) }}"
+              style="width:90px; border-radius:6px;">
+        </div>
+      {% endif %}
+
+      <!-- 관광지 평점 입력 -->
+      <form action="{{ url_for('admin.update_attraction_rating', city_name=city.city, district_name=d_name, attraction_name=a_name) }}"
+            method="POST"
+            style="display:inline-block; margin-left:10px;">
+        <input type="number" name="rating"
+              min="0" max="5" step="0.1"
+              value="{{ attr.rating if attr.rating is not none else '' }}"
+              style="width:60px;">
+        <button type="submit">저장</button>
+      </form>
+
+      <a href="{{ url_for('admin.delete_attraction', city_name=city.city, district_name=d_name, attraction_name=a_name) }}"
+        class="delete" style="margin-left:6px;">삭제</a>
+    </div>
+    {% endfor %}
+  {% endfor %}
+
 </div>
+{% endif %}
+{% endfor %}
 {% endfor %}
 
 </div>
-{% endfor %}
 
-</div>
+<!-- ================= regions → JS ================= -->
+<script id="regions-data" type="application/json">
+{{ regions | tojson }}
+</script>
+
+<script>
+const regionsData = JSON.parse(
+  document.getElementById('regions-data').textContent
+);
+
+/* ---------- 도시 필터 ---------- */
+const cityFilter = document.getElementById('city-filter');
+if(cityFilter){
+  cityFilter.addEventListener('change', e => {
+    const v = e.target.value;
+    const p = new URLSearchParams(window.location.search);
+    if(v === 'all') p.delete('city');
+    else p.set('city', v);
+    window.location.search = '?' + p.toString();
+  });
+}
+
+/* ---------- 구 선택 + 체크리스트 ---------- */
+regionsData.forEach(region => {
+  region.cities.forEach(city => {
+    const cityId = city.city.replace(/ /g, "_");
+
+    const districtSelect = document.getElementById('district-filter-' + cityId);
+    const districtHidden = document.getElementById('selected-district-' + cityId);
+    const districtInput  = document.getElementById('district-input-' + cityId);
+    const checklistForm = document.querySelector(`form.checklist[data-city="${cityId}"]`);
+
+    if(districtSelect && districtHidden && districtInput){
+      districtInput.value = districtSelect.value;
+
+      districtSelect.addEventListener('change', () => {
+        districtHidden.value = districtSelect.value;
+        districtInput.value  = districtSelect.value;
+      });
+    }
+
+    if(checklistForm){
+      checklistForm.querySelectorAll('.category').forEach(cat => {
+        const chks = cat.querySelectorAll('.chk');
+        const scoreSpan = cat.querySelector('.score-value');
+        const hidden = cat.querySelector('.hidden-score');
+
+        chks.forEach(c => {
+          c.addEventListener('change', () => {
+            let sum = 0;
+            chks.forEach(x => x.checked && (sum += +x.dataset.score));
+            scoreSpan.textContent = sum;
+            hidden.value = sum;
+          });
+        });
+      });
+    }
+  });
+});
+</script>
+
 </body>
 </html>

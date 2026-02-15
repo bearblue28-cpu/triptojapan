@@ -6,7 +6,6 @@
 
 <div class="page">
 
-    <!-- 상단 바 -->
     <div class="top-bar">
         <a href="{{ url_for('home') }}">홈으로</a>
     </div>
@@ -15,34 +14,91 @@
 
         <div class="header">
             <h2>추천 여행지</h2>
-            <a href="{{ url_for('reset') }}" class="btn btn-primary">
+            <a href="{{ url_for('survey') }}" class="btn btn-primary">
                 다시 설문하기
             </a>
         </div>
 
-        <!-- ✅ 추천 카드 리스트 중앙 정렬 -->
+        {% if results %}
         <div class="recommend-list">
-            {% for dest in results %}
-            <a href="{{ url_for('city_detail', city_name=dest.city) }}" class="card link-card">
-                <div class="city">{{ dest.city }}</div>
-                <div class="desc">{{ dest.description }}</div>
 
-                <div class="highlights">
-                    추천 장소:
-                    {% for h in dest.highlights %}
-                        {{ display_text(h) }}{% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                </div>
+            {% for dest in results %}
+            <a href="{{ url_for('city_detail', city_name=dest.city) }}" 
+               class="card link-card"
+               data-percent="{{ dest.percent }}">
+
+                <div class="city">{{ dest.city }}</div>
+
+                {% if dest.description %}
+                <div class="desc">{{ dest.description }}</div>
+                {% endif %}
+
+                {% if dest.region %}
+                <div class="region">지역: {{ dest.region }}</div>
+                {% endif %}
 
                 <div class="percent">
                     유형 일치: {{ dest.percent }}%
                 </div>
             </a>
             {% endfor %}
+
         </div>
 
-    </div>
+        <!-- 🔥 더보기 버튼 -->
+        <div style="text-align:center; margin-top:20px;">
+            <button id="more-btn" class="btn btn-secondary" style="display:none;">
+                다른 지역 더보기
+            </button>
+        </div>
 
+        {% else %}
+        <p style="text-align:center; color:#999; margin-top:40px;">
+            😢 추천 결과가 없습니다. 설문을 다시 진행해 주세요.
+        </p>
+        {% endif %}
+
+    </div>
 </div>
+
+<!-- ✅ JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const cards = document.querySelectorAll(".link-card");
+    const moreBtn = document.getElementById("more-btn");
+
+    let hasLow = false;
+
+    cards.forEach(card => {
+        const percent = parseInt(card.dataset.percent);
+
+        if (percent < 50) {
+            card.style.display = "none";
+            card.classList.add("low-match");
+            hasLow = true;
+        }
+    });
+
+    if (hasLow) {
+        moreBtn.style.display = "inline-block";
+    }
+
+    moreBtn?.addEventListener("click", function() {
+        document.querySelectorAll(".low-match").forEach(card => {
+            card.style.display = "block";
+        });
+
+        moreBtn.style.display = "none";
+    });
+
+});
+</script>
+
+<style>
+.low-match {
+    opacity: 0.6;
+}
+</style>
 
 {% endblock %}

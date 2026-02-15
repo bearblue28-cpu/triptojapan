@@ -12,6 +12,9 @@ body { font-family:'Pretendard', sans-serif; padding:20px; background:#f5f6f8; t
 .top-btn:hover { background:#3563d6; }
 .card { background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.05); text-align:left; margin-bottom:12px; }
 .card strong { color:#4f7cff; }
+.tag { display: inline-block; padding: 4px 8px; margin: 2px; background-color: #eee; border-radius: 4px; font-size: 0.9rem; }
+#toggle-tags, #toggle-bg { margin-left: 5px; cursor: pointer; padding: 2px 6px; background:#4f7cff; color:#fff; border:none; border-radius:4px; }
+.card.backgrounds .tag { background-color: #d9f0ff; } /* 배경 태그 색상 구분 */
 </style>
 </head>
 <body>
@@ -25,13 +28,85 @@ body { font-family:'Pretendard', sans-serif; padding:20px; background:#f5f6f8; t
     <h2>{{ attraction_name }}</h2>
     <p>{{ attraction.description }}</p>
 
+    <!-- 태그 카드 -->
     {% if attraction.tags %}
-        <div class="card"><strong>태그:</strong> {{ attraction.tags | join(', ') }}</div>
+        <div class="card">
+            <strong>주요 태그:</strong>
+            {% for tag in main_tags %}
+                <span class="tag">{{ tag }}</span>
+            {% endfor %}
+
+            {% if extra_tags %}
+                <span id="more-tags" style="display:none;">
+                    {% for tag in extra_tags %}
+                        <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </span>
+                <button id="toggle-tags">더보기</button>
+            {% endif %}
+        </div>
     {% endif %}
 
+    <!-- 배경 카드 -->
+    {% if backgrounds %}
+        {% set main_bg = backgrounds[:10] %}
+        {% set extra_bg = backgrounds[10:] %}
+        <div class="card backgrounds">
+            <strong>촬영/배경 정보:</strong>
+            {% for bg in main_bg %}
+                <span class="tag">{{ bg }}</span>
+            {% endfor %}
+
+            {% if extra_bg %}
+                <span id="more-bg" style="display:none;">
+                    {% for bg in extra_bg %}
+                        <span class="tag">{{ bg }}</span>
+                    {% endfor %}
+                </span>
+                <button id="toggle-bg">더보기</button>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- 영화 카드 -->
     {% if attraction.movies %}
         <div class="card"><strong>관련 영화:</strong> {{ attraction.movies | join(', ') }}</div>
     {% endif %}
 </div>
+
+<!-- JS: 태그 & 배경 더보기 토글 -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 태그 더보기
+  const btnTags = document.getElementById("toggle-tags");
+  if (btnTags) {
+    btnTags.addEventListener("click", () => {
+      const more = document.getElementById("more-tags");
+      if (more.style.display === "none") {
+        more.style.display = "inline";
+        btnTags.textContent = "접기";
+      } else {
+        more.style.display = "none";
+        btnTags.textContent = "더보기";
+      }
+    });
+  }
+
+  // 배경 더보기
+  const btnBg = document.getElementById("toggle-bg");
+  if (btnBg) {
+    btnBg.addEventListener("click", () => {
+      const more = document.getElementById("more-bg");
+      if (more.style.display === "none") {
+        more.style.display = "inline";
+        btnBg.textContent = "접기";
+      } else {
+        more.style.display = "none";
+        btnBg.textContent = "더보기";
+      }
+    });
+  }
+});
+</script>
 </body>
 </html>

@@ -7,16 +7,33 @@
     <style>
         body {
             font-family: 'Pretendard', sans-serif;
-            background: #f5f6f8;
             margin: 0;
             padding: 0;
-            text-align: center;
+        }
+
+        /* ===== 도시 배경 이미지 ===== */
+        .city-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('{{ url_for("static", filename="uploads/" ~ city.images.main) }}');
+            background-size: cover;       /* 화면 가득 채우기 */
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;                  /* 컨텐츠 뒤로 */
+            pointer-events: none;         /* 클릭 이벤트 무시 */
+            opacity: 0.6;                 /* 필요 시 투명도 조절 */
         }
 
         .container {
             max-width: 800px;
             margin: 100px auto 50px;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;                   /* 컨텐츠가 배경 위로 */
+            text-align: center;
         }
 
         .district, .spot {
@@ -49,9 +66,34 @@
             text-decoration: none;
             font-weight: 600;
         }
+
+        /* 정렬 버튼 */
+        .sort-buttons {
+            margin: 16px 0;
+            text-align: right;
+        }
+
+        .sort-buttons .btn {
+            padding: 6px 12px;
+            margin-left: 6px;
+            border-radius: 6px;
+            text-decoration: none;
+            background: #f0f0f0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .sort-buttons .btn.active {
+            background: #4f7cff;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+
+<!-- 도시 배경 -->
+<div class="city-background"></div>
+
 <div class="container">
 
     <a href="{{ url_for('home') }}" class="top-btn">홈으로 가기</a>
@@ -68,29 +110,19 @@
         </div>
     {% endif %}
 
-    <!-- 🔹 명소 -->
-    {% if city.spots %}
-        <h3 style="margin-top:40px;">주요 명소</h3>
-        {% for spot in city.spots %}
-            <div class="spot">
-                <h4>{{ spot.name }}</h4>
-                <p>{{ spot.description }}</p>
-
-                {% for tag in spot.tags %}
-                    <span class="tag">{{ tag }}</span>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-    <!-- 🔹 기존 구/지구 -->
+    <!-- 🔹 구/지구 정렬 버튼 -->
     {% if districts %}
-        <h3 style="margin-top:40px;">구 / 지구</h3>
+        <div class="sort-buttons">
+            <a href="{{ url_for('city_detail', city_name=city.city, sort='views') }}"
+               class="btn {% if current_sort == 'views' %}active{% endif %}">인기순</a>
+            <a href="{{ url_for('city_detail', city_name=city.city, sort='name') }}"
+               class="btn {% if current_sort == 'name' %}active{% endif %}">가나다순</a>
+        </div>
+
+        <h3 style="margin-top:20px;">구 / 지구</h3>
         {% for d_name, district in districts.items() %}
             <div class="district">
-                <a href="{{ url_for('district_detail',
-                    city_name=city.city,
-                    district_name=d_name) }}">
+                <a href="{{ url_for('district_detail', city_name=city.city, district_name=d_name) }}">
                     {{ d_name }}
                 </a>
                 <p>{{ district.description }}</p>

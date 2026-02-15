@@ -1,123 +1,64 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>검색 결과</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background: #f5f6f8;
-            margin: 0;
-            padding: 0;
-        }
+{% extends "layout.html" %}
+{% block content %}
 
-        .container {
-            max-width: 800px;
-            margin: 100px auto 50px; /* 검색창 때문에 상단 여백 */
-            padding: 0 20px;
-            text-align: center; /* 결과 중앙 정렬 */
-        }
+<style>
+.search-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.search-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+.search-result-list { list-style: none; padding: 0; margin: 0; }
+.search-result-item { background: #fff; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.search-result-item a { font-size: 17px; font-weight: 600; color: #222; text-decoration: none; }
+.search-result-item a:hover { text-decoration: underline; }
+.search-result-item span.desc { color: #666; font-size: 14px; }
+mark { background: #fff2a8; padding: 0 3px; border-radius: 4px; }
+.type-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-right: 6px; vertical-align: middle; }
+.type-badge.city { background: #eef2ff; color: #4f7cff; }
+.type-badge.district { background: #e9f8ef; color: #2fa36b; }
+.type-badge.attraction { background: #fff1e5; color: #ff8a2a; }
+</style>
 
-        /* 상단 검색창 고정 */
-        .search-form {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            z-index: 999;
-            display: flex;
-            gap: 8px;
-        }
+<div class="search-container">
+    <div class="search-title">🔍 검색 결과: "{{ query }}"</div>
 
-        .search-form input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
+    {% if results %}
+    <ul class="search-result-list">
+        {% for r in results %}
+        <li class="search-result-item">
+            {% if r.type == "city" %}
+                <span class="type-badge city">도시</span>
+                <a href="{{ url_for('city_detail', city_name=r.name) }}" class="highlight">{{ r.name }}</a>
+                <span class="desc">{{ r.description }}</span>
 
-        .search-form button {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 8px;
-            background: #4f7cff;
-            color: #fff;
-            cursor: pointer;
-            font-weight: 600;
-        }
+            {% elif r.type == "district" %}
+                <span class="type-badge district">구</span>
+                <a href="{{ url_for('district_detail', city_name=r.city, district_name=r.name) }}" class="highlight">{{ r.name }}</a>
+                <span class="desc">{{ r.description }}</span>
 
-        .top-btn {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            border-radius: 12px;
-            background: #4f7cff;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
+            {% elif r.type == "attraction" %}
+                <span class="type-badge attraction">명소</span>
+                <a href="{{ url_for('attraction_detail', city_name=r.city, district_name=r.district, attraction_name=r.name) }}" class="highlight">{{ r.name }}</a>
+                <span class="desc">{{ r.description }}</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>검색 결과가 없습니다.</p>
+    {% endif %}
+</div>
 
-        .top-btn:hover {
-            background: #3563d6;
-        }
+<script>
+const query = "{{ query|escapejs }}";
+if(query){
+    document.querySelectorAll('.highlight').forEach(el => {
+        const regex = new RegExp(query, 'gi');
+        el.innerHTML = el.textContent.replace(regex, match => `<mark>${match}</mark>`);
+    });
 
-        .result {
-            background: #fff;
-            margin: 12px 0;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            text-align: left;
-        }
+    document.querySelectorAll('.desc').forEach(el => {
+        const regex = new RegExp(query, 'gi');
+        el.innerHTML = el.textContent.replace(regex, match => `<mark>${match}</mark>`);
+    });
+}
+</script>
 
-        .result a {
-            font-weight: 600;
-            color: #4f7cff;
-            text-decoration: none;
-        }
-
-        .result a:hover {
-            text-decoration: underline;
-        }
-
-        .no-result {
-            color: #999;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
-    <!-- 상단 검색창 -->
-    <form action="{{ url_for('search') }}" method="get" class="search-form">
-        <input type="text" name="q" placeholder="도시나 관광지 검색" value="{{ query }}">
-        <button type="submit">검색</button>
-    </form>
-
-    <div class="container">
-        <!-- 홈 버튼 -->
-        <a href="{{ url_for('survey') }}" class="top-btn"> 홈으로 가기</a>
-
-        {% if results %}
-            {% for r in results %}
-                <div class="result">
-                    {% if r.type == "city" %}
-                        <a href="{{ url_for('city_detail', city_name=r.name) }}">{{ r.name }}</a>
-                        <span> - {{ r.description }}</span>
-                    {% elif r.type == "district" %}
-                        <a href="{{ url_for('district_detail', city_name=r.city, district_name=r.name) }}">
-                            {{ r.name }} ({{ r.city }})
-                        </a>
-                        <span> - {{ r.description }}</span>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="no-result">검색 결과가 없습니다.</p>
-        {% endif %}
-    </div>
-</body>
-</html>
+{% endblock %}
